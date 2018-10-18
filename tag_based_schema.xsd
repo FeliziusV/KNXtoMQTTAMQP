@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema version="1.0" xmlns="http://knx.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://knx.org" attributeFormDefault="unqualified" elementFormDefault="qualified">
+
+  <xsd:annotation>
+    <xsd:documentation xml:lang="EN">XML Schema for vocabulary structure. Tag vocabularies and KNX Information models can be built based on this XML Schema.</xsd:documentation>
+  </xsd:annotation>
+
+  <!-- **************************************************************************** -->
+  <!-- ENUMERATIONS -->
+  <!-- **************************************************************************** -->
+
+  <xsd:simpleType name="occurrenceEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="zero" />
+      <xsd:enumeration value="one" />
+      <xsd:enumeration value="many" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <xsd:simpleType name="typeEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="string" />
+	  <xsd:enumeration value="int" />
+	  <xsd:enumeration value="real" />
+	  <xsd:enumeration value="bool" />
+	  <xsd:enumeration value="ref" />
+	  <xsd:enumeration value="marker" />
+	  <xsd:enumeration value="date" />
+	  <xsd:enumeration value="time" />
+	  <xsd:enumeration value="datetime" />
+    </xsd:restriction>
+  </xsd:simpleType>
+
+  <!-- **************************************************************************** -->
+  <!-- GLOBAL ELEMENTS -->
+  <!-- **************************************************************************** -->
+
+  <xsd:element name="tag_based_model">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="vocabulary" type="Vocabulary"/>
+        <xsd:element name="informationmodel" type="InformationModel"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+  
+  <!-- **************************************************************************** -->
+  <!-- VOCABULARY -->
+  <!-- **************************************************************************** -->
+
+  <xsd:complexType name="Vocabulary">
+    <xsd:sequence  >
+     <xsd:element name="marker" type="Marker" minOccurs="0" maxOccurs="unbounded"/>
+	  <xsd:element name="basic" type="Basic" minOccurs="0" maxOccurs="unbounded"/>
+	  <xsd:element name="reference" type="Reference" minOccurs="0" maxOccurs="unbounded"/>
+	  <xsd:element name="composition" type="Composition" minOccurs="0" maxOccurs="unbounded"/>
+	</xsd:sequence>
+  </xsd:complexType>  
+  
+  <!-- **************************************************************************** -->
+  <!-- INFORMATION MODEL -->
+  <!-- **************************************************************************** -->
+
+  <xsd:complexType name="InformationModel">
+    <xsd:sequence>
+      <xsd:element name="entity" type="Entity" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType> 
+ 
+  <!-- **************************************************************************** -->
+  <!-- ENTITY -->
+  <!-- **************************************************************************** -->
+
+  <xsd:complexType name="Entity">
+    <xsd:sequence>
+      <xsd:element name="feature" type="Feature" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  
+  <!-- **************************************************************************** -->
+  <!-- Feature -->
+  <!-- **************************************************************************** -->
+
+  <xsd:complexType name="Feature">
+    <xsd:attribute name="tag" type="xsd:IDREF"/>
+
+    <xsd:attribute name="value" type="xsd:string"/>
+
+
+  </xsd:complexType>
+  
+  <!-- **************************************************************************** -->
+  <!-- TAG -->
+  <!-- **************************************************************************** -->
+
+  <xsd:complexType name="Tag">
+    <xsd:attribute name="name"  use="required"/>
+    <xsd:attribute name="description" type="xsd:string"/>
+
+
+  
+  </xsd:complexType>
+
+  
+  <!-- **************************************************************************** -->
+  <!-- Tag/Basic -->
+  <!-- **************************************************************************** -->
+  <xsd:complexType name="Basic">
+    <xsd:complexContent>
+      <xsd:extension base="Tag">
+
+       <xsd:attribute name="type" type="typeEnum" use="required"/>
+
+
+      </xsd:extension>
+    </xsd:complexContent>
+
+  </xsd:complexType>
+
+  
+
+  <!-- **************************************************************************** -->
+  <!-- Tag/Marker -->
+  <!-- **************************************************************************** -->
+  <xsd:complexType name="Marker">
+    <xsd:complexContent>
+      <xsd:extension base="Tag">
+
+
+
+      </xsd:extension>
+    </xsd:complexContent>
+
+  </xsd:complexType>
+
+  <!-- **************************************************************************** -->
+  <!-- Tag/Reference -->
+  <!-- **************************************************************************** -->
+  <xsd:complexType name="Reference">
+    <xsd:complexContent>
+      <xsd:extension base="Tag">
+        
+
+          <xsd:attribute name="usedwith" type="xsd:IDREF" />
+        
+
+      </xsd:extension>
+    </xsd:complexContent>
+
+  </xsd:complexType>
+
+  <!-- **************************************************************************** -->
+  <!-- Composition -->
+  <!-- **************************************************************************** -->
+
+  <xsd:complexType name="Composition">
+
+    <xsd:attribute name="tag" type="xsd:IDREF" use="required"/>
+
+    <xsd:attribute name="occurrence" type="occurrenceEnum" use="required"/>
+
+    <xsd:attribute name="usedwith" type="xsd:IDREF" use="required"/>
+
+
+  </xsd:complexType>
+
+</xsd:schema>
