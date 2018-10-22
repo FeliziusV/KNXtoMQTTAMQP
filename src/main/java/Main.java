@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*
+
         XMLReader xmlReader = new XMLReader();
         try {
 
@@ -29,8 +29,7 @@ public class Main {
             PropertiesManager prop = new PropertiesManager("KNXtoMQTTAMQP.config");
             DatapointManager datapointManager = new DatapointManager(tag_model, prop);
             datapointManager.setUpConnection();
-           CommandShell commandShell =new CommandShell(System.in, System.out);
-            commandShell.run();
+
             while (active) {
                 datapointManager.readDatapoints();
             }
@@ -42,10 +41,7 @@ public class Main {
         } catch (IoT_Connection_Exception e2) {
             return;
         }
-        */
 
-
-    KNX_Communication knx=new KNX_Communication("169.254.146.146");
 
 
     }

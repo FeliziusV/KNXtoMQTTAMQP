@@ -3,6 +3,7 @@ import org.slf4j.LoggerFactory;
 import tuwien.auto.calimero.GroupAddress;
 
 import tuwien.auto.calimero.KNXException;
+import tuwien.auto.calimero.KNXFormatException;
 import tuwien.auto.calimero.datapoint.Datapoint;
 import tuwien.auto.calimero.knxnetip.Discoverer;
 import tuwien.auto.calimero.knxnetip.KNXnetIPConnection;
@@ -14,42 +15,24 @@ import tuwien.auto.calimero.process.ProcessCommunicatorImpl;
 
 import java.net.InetSocketAddress;
 
-public  class KNX_Communication{
+public  class KNX_Communication {
 
     private final Logger Log = LoggerFactory.getLogger(Main.class);
+    private ProcessCommunicator pc;
+    private KNXNetworkLink knxLink;
 
 
-    private static final InetSocketAddress local = new InetSocketAddress("169.254.232.243", 0);
+    public KNX_Communication(String gatewayIP, String localIP) {
 
-    public KNX_Communication(String gatewayIP) {
-        String group="1/1/2";
         final InetSocketAddress remote = new InetSocketAddress(gatewayIP, 3671);
 
-        // Create our network link, and pass it to a process communicator
-
-        try (KNXNetworkLink knxLink = KNXNetworkLinkIP.newTunnelingLink(local, remote, false, TPSettings.TP1);
-
-             ProcessCommunicator pc = new ProcessCommunicatorImpl(knxLink)) {
-            GroupAddress g=new GroupAddress(group);
-           pc.write(g,true);
-           boolean value=pc.readBool(new GroupAddress("1/1/32"));
-
-            //boolean value=pc.readBool(new GroupAddress(group));
+        InetSocketAddress local = new InetSocketAddress(localIP, 0);
+        try {
+            knxLink = KNXNetworkLinkIP.newTunnelingLink(local, remote, false, TPSettings.TP1);
+            pc = new ProcessCommunicatorImpl(knxLink);
 
 
-
-
-            System.out.println("datapoint " + group + " value ="+value);
-
-
-
-            // Uncomment the next line, if you want to write back the same value to the KNX network
-
-            // pc.write(group, value);
-
-        }
-
-        catch (KNXException | InterruptedException e) {
+        } catch (KNXException | InterruptedException e) {
 
             System.out.println("Error accessing KNX datapoint: " + e.getMessage());
 
@@ -57,13 +40,37 @@ public  class KNX_Communication{
 
 
     }
-    public void disconnect(){
+
+    public void disconnect() {
+        pc.close();
+        knxLink.close();
 
     }
 
-    public String readDatapoint(String x){
-        return "X";
-    }
+    public double readDouble(String groupadress) {
+        double value=0;
+        try {
+            System.out.println("read boolean value from datapoint " + groupadress);
+
+                value = pc.readFloat(new GroupAddress(groupadress));
+
+            System.out.println("datapoint " + groupadress + " value = " + value);
+
+        } catch (KNXFormatException e1) {
+
+        }
+        catch (KNXException e2){
+
+
+        }
+        catch (InterruptedException e3){
+
+        }
+        return value;
+}
+public String readString(String groupaddress){
+        return  "";
+}
 
 
 

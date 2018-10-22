@@ -33,18 +33,55 @@
 	
 	<informationmodel>
 	
+	<entity>
+	<feature tag="id" value="celsius"/>
+	<feature tag="unit"/>
+	<feature tag="name" value="Celsius"/>
+	<feature tag="symbol" value="C"/>
+	<feature tag="offset" value="-273.15"/>
+	<feature tag="kelvin" value="1"/>
+    </entity>
 	
+	
+	
+	<entity>
+	<feature tag="id" value="temp_val"/>
+	<feature tag="value"/>
+	<feature tag="valueReal"/>
+	<feature tag="name" value="Temperature"/>
+	<feature tag="min" value="-273"/>
+	<feature tag="max" value="670760"/>
+	<feature tag="unitRef" value="celsius"/>
+    </entity>
+	
+	<entity>
+	<feature tag="id" value="temp_type"/>
+	<feature tag="type"/>
+	<feature tag="name" value="Temperature type"/>
+	<feature tag="valueRef" value="temp_val"/>
+    </entity>
 	
 	<entity>
 	<feature tag="id" value="temperature_dp"/>
 	<feature tag="datapoint"/>
 	<feature tag="name" value="Temperature temperature"/>
 	<feature tag="typeRef" value="temp_type"/>
-	<feature tag="groupAddress" value="1/3/4"/>
-	<feature tag="valueType" value="grad"/>
-
-   	 </entity>
+    </entity>
 	
+	
+	<entity>
+	<feature tag="id" value="serial"/>
+	<feature tag="property"/>
+	<feature tag="serialnumber" value="AB13"/>
+    </entity>
+	
+	<entity>
+	<feature tag="id" value="temperature_controller"/>
+	<feature tag="device"/>
+	<feature tag="name" value="Temperature controller"/>
+	<feature tag="propertyRef" value="serial"/>
+	<feature tag="datapointRef" value="temperature_dp"/>
+	</entity>
 	
 
 	

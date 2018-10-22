@@ -8,9 +8,13 @@ public class Datapoint {
 
 private String name;
 private String topic;
+private String groupAdress;
+private String dataType;
 
-    public Datapoint(String name){
+    public Datapoint(String name,String groupAdress,String dataType){
         this.name=name;
+        this.groupAdress=groupAdress;
+        this.dataType=dataType;
         }
 
         public String getName(){
@@ -25,7 +29,11 @@ private String topic;
         return topic;
         }
 
+    public String getGroupAdress() {
+        return groupAdress;
+    }
 
-
-
+    public String getDataType() {
+        return dataType;
+    }
 }

@@ -20,7 +20,7 @@ public class DatapointManager {
     private KNX_Communication KNX_con;
 
     private boolean MQTT=false;
-    private boolean AMQP=true;
+    private boolean AMQP=false;
 
     private final Logger Log = LoggerFactory.getLogger(Main.class);
 
@@ -39,7 +39,7 @@ public class DatapointManager {
             Entity_DTO entity = pair.getValue();
             if (entity.containsFeature("datapoint")) {
                 Log.info("Datapoint found");
-                Datapoint datapoint = new Datapoint(entity.getFeature("id"));
+                Datapoint datapoint = new Datapoint(entity.getFeature("id"),entity.getFeature("groupAddress"),entity.getFeature("valueTyoe"));
                 Log.info("new Datapoint created");
                 String topic = entity.getFeature("id");
                 Log.info(topic);
@@ -115,9 +115,10 @@ public class DatapointManager {
 
             }
 
-        if(AMQP){
+      /*  if(AMQP){
             setUpAMQP();
         }
+        */
 
     }
     private void setUpMQTT() throws Invalid_input_Exception, IoT_Connection_Exception {
@@ -151,7 +152,8 @@ public class DatapointManager {
         MQTT_con = new MQTT_Communication(MQTT_broker_url, qos);
 
         String KNX_host=prop.readProperties("KNX_host");
-        KNX_con= new KNX_Communication(KNX_host);
+        KNX_con= new KNX_Communication(KNX_host,"169.254.232.243");
+
 
     }
     private void setUpAMQP() throws Invalid_input_Exception, IoT_Connection_Exception {
@@ -175,7 +177,7 @@ public class DatapointManager {
             AMQP_con = new AMQP_Communication(userNAme, password, virtualHost, hostName, Integer.parseInt(portNumber), topiclist);
 
         String KNX_host=prop.readProperties("KNX_host");
-        KNX_con= new KNX_Communication(KNX_host);
+        KNX_con= new KNX_Communication(KNX_host,"169.254.232.243");
 
     }
 
@@ -229,12 +231,13 @@ public class DatapointManager {
     public void readDatapoints() throws IoT_Connection_Exception {
          for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
              Datapoint datapoint=pair.getValue();
-             String value=KNX_con.readDatapoint(datapoint.getName());
+
+             String value="temperature,device=KNXtoMQTTAMQP value="+KNX_con.readDouble(datapoint.getGroupAdress());
              if(MQTT){
                  publishMQTT(datapoint.getTopic(),value);
              }
              if(AMQP){
-                 publishAMQP(KNX_con.readDatapoint(datapoint.getName()),value);
+                 publishAMQP(KNX_con.readString(datapoint.getName()),value);
              }
          }
     }
