@@ -20,7 +20,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-
+/*
         XMLReader xmlReader = new XMLReader();
         try {
 
@@ -42,8 +42,14 @@ public class Main {
             return;
         }
 
+*/
+try {
+    MQTT_Communication c = new MQTT_Communication("tcp://localhost:1883", 0);
+    c.publishMessage("x","x");
+}
+catch (IoT_Connection_Exception e){
 
-
+}
     }
 
 }
