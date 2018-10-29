@@ -88,11 +88,11 @@ public class DatapointManager {
 
         }
         try {
-            if (prop.readProperties("mode").contains("MQTT")) {
+            if (prop.readProperties("mode").equals("MQTT")) {
                 MQTT=true;
 
             }
-            if (prop.readProperties("mode").contains("AMQP")) {
+            if (prop.readProperties("mode").equals("AMQP")) {
                 AMQP=true;
 
             }
@@ -115,10 +115,10 @@ public class DatapointManager {
 
             }
 
-      /*  if(AMQP){
+   else {
             setUpAMQP();
         }
-        */
+
 
     }
     private void setUpMQTT() throws Invalid_input_Exception, IoT_Connection_Exception {
@@ -209,7 +209,7 @@ public class DatapointManager {
             if( MQTT){
                 publishMQTT( topic,  message);
             }
-            if(AMQP){
+            else{
                 publishAMQP( topic,  message);
 
 
@@ -225,7 +225,7 @@ public class DatapointManager {
 
 
     private void publishAMQP(String topic,String message) throws IoT_Connection_Exception {
-        AMQP_con.publishMessage(message,"ex"+topic,message+"key");
+        AMQP_con.publishMessage(message,"ex"+topic,"key");
     }
 
     public void readDatapoints() throws IoT_Connection_Exception {
@@ -236,8 +236,8 @@ public class DatapointManager {
              if(MQTT){
                  publishMQTT(datapoint.getTopic(),value);
              }
-             if(AMQP){
-                 publishAMQP(KNX_con.readString(datapoint.getName()),value);
+             else{
+                 publishAMQP(datapoint.getTopic(),value);
              }
          }
     }

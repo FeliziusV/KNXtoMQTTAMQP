@@ -38,7 +38,7 @@ public  class AMQP_Communication {
                 Log.info(topic.get(i));
                 channel.exchangeDeclare("ex"+topic.get(i), "direct", true);
                 channel.queueDeclare(topic.get(i), true, false, false, null);
-                channel.queueBind(topic.get(i), "ex"+topic.get(i), "ex"+topic.get(i)+"key");
+                channel.queueBind(topic.get(i), "ex"+topic.get(i), "key");
             }
 
         }
@@ -61,6 +61,7 @@ public  class AMQP_Communication {
      */
     public void publishMessage(String message, String exchangeName, String bindingKey) throws IoT_Connection_Exception {
         try {
+            System.out.println("-"+exchangeName+"-"+bindingKey+"-");
             channel.basicPublish(exchangeName, bindingKey, null, message.getBytes());
             Log.info("Messge successfully published");
         }
