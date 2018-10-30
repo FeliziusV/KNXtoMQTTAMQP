@@ -22,29 +22,38 @@ public class Main {
 
 
         XMLReader xmlReader = new XMLReader();
-        try {
 
-            HashMap<String, Entity_DTO> tag_model = xmlReader.readConfig("knx_input_model.xml");
+      try {
+          HashMap<String, Entity_DTO> tag_model = xmlReader.readConfig("knx_input_model.xml");
 
-            PropertiesManager prop = new PropertiesManager("KNXtoMQTTAMQP.config");
-            DatapointManager datapointManager = new DatapointManager(tag_model, prop);
-            datapointManager.setUpConnection();
+          PropertiesManager prop = new PropertiesManager("KNXtoMQTTAMQP.config");
+          DatapointManager datapointManager = new DatapointManager(tag_model, prop);
+          datapointManager.setUpConnection();
 
-            while (active) {
-                datapointManager.readDatapoints();
-            }
-            datapointManager.disconnect();
-        } catch (Invalid_input_Exception e1) {
+          while (active) {
+              datapointManager.readDatapoints();
+          }
+          datapointManager.disconnect();
+      }
+      catch (Invalid_input_Exception e1) {
 
-            return;
-
-        } catch (IoT_Connection_Exception e2) {
-            return;
+        return;
         }
+      catch (IoT_Connection_Exception e1) {
+
+          return;
+      }
+
+}
+
+
+
+
+
 
 
 
     }
 
-}
+
 

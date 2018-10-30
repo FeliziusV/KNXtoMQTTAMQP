@@ -41,18 +41,14 @@ public  class KNX_Communication {
 
     }
 
-    public void disconnect() {
-        pc.close();
-        knxLink.close();
 
-    }
 
     public double readDouble(String groupadress) {
         double value=0;
         try {
-            System.out.println("read boolean value from datapoint " + groupadress);
+            System.out.println("read double value from datapoint " + groupadress);
 
-                value = pc.readFloat(new GroupAddress(groupadress));
+                 value= pc.readFloat(new GroupAddress(groupadress));
 
             System.out.println("datapoint " + groupadress + " value = " + value);
 
@@ -68,9 +64,52 @@ public  class KNX_Communication {
         }
         return value;
 }
+
+
+public boolean readBoolean(String groupadress){
+        boolean value=false;
+        try{
+            value=pc.readBool(new GroupAddress(groupadress));
+        }
+        catch (KNXException e){
+
+        }
+        catch (InterruptedException e3){
+
+        }
+        return value;
+
+}
+public void writeBoolean(String groupAddress, boolean value){
+    try{
+       pc.write(new GroupAddress(groupAddress),value);
+
+    }
+    catch (KNXException e){
+
+    }
+
+}
+public void writeDouble(String groupAddress, double value){
+
+
+        try{
+            pc.write(new GroupAddress(groupAddress),(float)value,true);
+
+        }
+        catch (KNXException e){
+
+        }
+}
 public String readString(String groupaddress){
         return  "";
 }
+
+    public void disconnect() {
+        pc.close();
+        knxLink.close();
+
+    }
 
 
 
