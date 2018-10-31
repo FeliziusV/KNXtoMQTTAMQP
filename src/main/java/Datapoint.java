@@ -4,16 +4,19 @@
  * @author Felix Walcher
  * @version 0.1
  */
+
+
+//representation of a KNX datapoint
 public class Datapoint {
 
 private String name;
 private String topic;
-private String groupAdress;
+private String groupAddress;
 private String dataType;
 
-    public Datapoint(String name,String groupAdress,String dataType){
+    public Datapoint(String name, String groupAddress, String dataType){
         this.name=name;
-        this.groupAdress=groupAdress;
+        this.groupAddress = groupAddress;
         this.dataType=dataType;
         }
 
@@ -29,8 +32,8 @@ private String dataType;
         return topic;
         }
 
-    public String getGroupAdress() {
-        return groupAdress;
+    public String getGroupAddress() {
+        return groupAddress;
     }
 
     public String getDataType() {

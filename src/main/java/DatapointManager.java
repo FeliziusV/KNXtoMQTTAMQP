@@ -26,7 +26,7 @@ public class DatapointManager {
 
 
     /**
-     * Constructor for a new Datapoint Manager. Creates new Datapoints for each Entity that contains the Datapoint Tag
+     * Constructor for a new Datapoint Manager. Creates new Datapoints for each Entity that contains the datapoint tags
      * @param tag_model   Hashmap containing all KNX entities
      * @param prop  Configuration File
      * @exception Invalid_input_Exception  throws if an error occurs during the reading process
@@ -39,7 +39,7 @@ public class DatapointManager {
             Entity_DTO entity = pair.getValue();
             if (entity.containsFeature("datapoint")) {
                 Log.info("Datapoint found");
-                Datapoint datapoint = new Datapoint(entity.getFeature("id"),entity.getFeature("groupAddress"),entity.getFeature("valueTyoe"));
+                Datapoint datapoint = new Datapoint(entity.getFeature("id"),entity.getFeature("groupAddress"),entity.getFeature("valueType"));
                 Log.info("new Datapoint created");
                 String topic = entity.getFeature("id");
                 Log.info(topic);
@@ -152,7 +152,8 @@ public class DatapointManager {
         MQTT_con = new MQTT_Communication(MQTT_broker_url, qos);
 
         String KNX_host=prop.readProperties("KNX_host");
-        KNX_con= new KNX_Communication(KNX_host,"169.254.232.243");
+        String Local_IP=prop.readProperties("Local_Ip");
+        KNX_con= new KNX_Communication(KNX_host,Local_IP);
 
 
     }
@@ -200,24 +201,6 @@ public class DatapointManager {
 
 
     }
-    /**
-     * Method to publish a Message to an IoT Broker
-     *
-     */
-    public void publishMessage(String topic, String message) throws IoT_Connection_Exception {
-
-            if( MQTT){
-                publishMQTT( topic,  message);
-            }
-            else{
-                publishAMQP( topic,  message);
-
-
-
-            }
-
-
-    }
 
     private void publishMQTT(String topic,String message) throws IoT_Connection_Exception {
         MQTT_con.publishMessage(topic,message);
@@ -231,8 +214,13 @@ public class DatapointManager {
     public void readDatapoints() throws IoT_Connection_Exception {
          for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
              Datapoint datapoint=pair.getValue();
-
-             String value="temperature,device=KNXtoMQTTAMQP value="+KNX_con.readDouble(datapoint.getGroupAdress());
+             String value="";
+             if(datapoint.getDataType().equals("grad")) {
+                  value = "temperature,device=KNXtoMQTTAMQP value=" + KNX_con.readDouble(datapoint.getGroupAddress());
+             }
+             else {
+                 value = "temperature,device=KNXtoMQTTAMQP value=" + KNX_con.readBoolean(datapoint.getGroupAddress());
+             }
              if(MQTT){
                  publishMQTT(datapoint.getTopic(),value);
              }

@@ -32,7 +32,7 @@ public  class AMQP_Communication {
         factory.setPort(portNumber);
         try {
             con = factory.newConnection();
-            Log.info("to AMQP Broker connected");
+            Log.info("to AMQP broker connected");
             channel = con.createChannel();
             for(int i=0; i<topic.size();i++) {
                 Log.info(topic.get(i));
@@ -63,10 +63,10 @@ public  class AMQP_Communication {
         try {
             System.out.println("-"+exchangeName+"-"+bindingKey+"-");
             channel.basicPublish(exchangeName, bindingKey, null, message.getBytes());
-            Log.info("Messge successfully published");
+            Log.info("AMQP message successfully published");
         }
         catch (IOException e1){
-            Log.info("Message publish faild");
+            Log.info("Message publishing failed");
             throw new IoT_Connection_Exception("IOException");
         }
 
@@ -81,14 +81,14 @@ public  class AMQP_Communication {
         try {
             channel.close();
             con.close();
-            Log.info("From AMQP Broker disconnected");
+            Log.info("from AMQP Broker disconnected");
         }
         catch (IOException e1){
             Log.info("IO Error");
             throw new IoT_Connection_Exception("IO Error");        }
         catch (TimeoutException e2){
-            Log.info("Disconnection from AMQP Broker failed");
-            throw new IoT_Connection_Exception("Disconnection from AMQP Broker failed");
+            Log.info("Disconnection from the AMQP Broker failed");
+            throw new IoT_Connection_Exception("Disconnection from the AMQP Broker failed");
         }
     }
 

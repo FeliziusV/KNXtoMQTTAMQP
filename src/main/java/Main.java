@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.HashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 public class Main {
@@ -30,19 +33,34 @@ public class Main {
           DatapointManager datapointManager = new DatapointManager(tag_model, prop);
           datapointManager.setUpConnection();
 
-          while (active) {
-              datapointManager.readDatapoints();
-          }
+
+
+          ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
+          exec.scheduleAtFixedRate(new Runnable() {
+              @Override
+              public void run() {
+                  try {
+                      datapointManager.readDatapoints();
+                  }
+                  catch (IoT_Connection_Exception e1) {
+
+                      return;
+                  }
+              }
+          }, 0, 1, TimeUnit.SECONDS);
+
+
+
           datapointManager.disconnect();
       }
       catch (Invalid_input_Exception e1) {
 
         return;
         }
-      catch (IoT_Connection_Exception e1) {
+        catch (IoT_Connection_Exception e){
 
-          return;
-      }
+        }
+
 
 }
 
