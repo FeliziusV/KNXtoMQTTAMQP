@@ -1,4 +1,4 @@
-
+package Exception;
 
 public class IoT_Connection_Exception extends Exception {
 

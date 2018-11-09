@@ -3,10 +3,11 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
+import  Exception.*;
+
 
 public  class AMQP_Communication {
     private final Logger Log = LoggerFactory.getLogger(Main.class);

@@ -6,10 +6,11 @@
  */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import Exception.*;
+
 
 public class DatapointManager {
 
@@ -87,7 +88,7 @@ public class DatapointManager {
 
 
         }
-        try {
+
             if (prop.readProperties("mode").equals("MQTT")) {
                 MQTT=true;
 
@@ -96,11 +97,8 @@ public class DatapointManager {
                 AMQP=true;
 
             }
-        }
-        catch (Invalid_input_Exception e) {
-            Log.info("Invalid Properties-File");
-            throw new Invalid_input_Exception("");
-        }
+
+
 
 
     }
@@ -108,7 +106,7 @@ public class DatapointManager {
      * Method to setUp the chosen IoT Communication
      *  @exception Invalid_input_Exception  throws if an error occurs during the reading process
      */
-    public void setUpConnection() throws Invalid_input_Exception, IoT_Connection_Exception {
+    public void setUpConnection() throws Invalid_input_Exception, IoT_Connection_Exception,KNX_Connection_Exception {
 
         if(MQTT){
                 setUpMQTT();
@@ -121,7 +119,7 @@ public class DatapointManager {
 
 
     }
-    private void setUpMQTT() throws Invalid_input_Exception, IoT_Connection_Exception {
+    private void setUpMQTT() throws Invalid_input_Exception, IoT_Connection_Exception,KNX_Connection_Exception {
         Log.info("MQTT Connection setUp");
 
         String MQTT_broker_url = null;
@@ -157,7 +155,7 @@ public class DatapointManager {
 
 
     }
-    private void setUpAMQP() throws Invalid_input_Exception, IoT_Connection_Exception {
+    private void setUpAMQP() throws Invalid_input_Exception, IoT_Connection_Exception,KNX_Connection_Exception {
 
 
             String userNAme = prop.readProperties("AMQP_userName").trim();
@@ -211,15 +209,15 @@ public class DatapointManager {
         AMQP_con.publishMessage(message,"ex"+topic,"key");
     }
 
-    public void readDatapoints() throws IoT_Connection_Exception {
+    public void readDatapoints() throws IoT_Connection_Exception,KNX_Connection_Exception {
          for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
              Datapoint datapoint=pair.getValue();
              String value="";
              if(datapoint.getDataType().equals("grad")) {
-                  value = "temperature,device=KNXtoMQTTAMQP value=" + KNX_con.readDouble(datapoint.getGroupAddress());
+                  value = datapoint.getName()+" device=KNXtoMQTTAMQP value=" + KNX_con.readDouble(datapoint.getGroupAddress());
              }
-             else {
-                 value = "temperature,device=KNXtoMQTTAMQP value=" + KNX_con.readBoolean(datapoint.getGroupAddress());
+             else if(datapoint.getDataType().equals("boolean")) {
+                 value = datapoint.getName()+"device=KNXtoMQTTAMQP value=" + KNX_con.readBoolean(datapoint.getGroupAddress());
              }
              if(MQTT){
                  publishMQTT(datapoint.getTopic(),value);

@@ -1,4 +1,4 @@
-
+package Exception;
 
 public class Invalid_input_Exception extends Exception {
 

@@ -1,0 +1,4 @@
+How to use KNXtoMQTT/AMQP:
+Before the use of the “KNXtoMQTT/AMQP” application, the specified IoT broker need to run and the KNXnet/IP Gateway has to be reachable. After this the “KNXtoMQTTAMQP.config” file in the root Folder of the application has to be defined.
+In order to use the application correctly, all parameters have to be filled in. At the moment, the application supports AMQP and MQTT for the IoT communication.
+Furthermore, the connecting KNX System has to follow the tag_based_shema.xsd schema as explained in 3.4 and saved as knx_input_model.xml. After this, the “main” class can be executed.
