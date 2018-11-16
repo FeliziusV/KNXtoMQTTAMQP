@@ -54,7 +54,7 @@ public class PropertiesManager {
    public String readProperties(String name) throws Invalid_input_Exception {
         String value=prop.getProperty(name);
         if(value==null){
-            Log.info("invalid Properties-File");
+            Log.info("invalid Properties-File:"+name);
             throw new Invalid_input_Exception("invalid Properties-File");
         }
        return value;
