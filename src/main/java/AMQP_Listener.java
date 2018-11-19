@@ -51,7 +51,16 @@ public class AMQP_Listener {
 
                         }
                     }
-                    else {
+                    else if(datatype.contains("String")) {
+                        try {
+
+                            knx_con.writeString(groupAddress, value);
+                        }
+                        catch ( Exception e2){
+
+                        }
+                    }
+                    else if (datatype.contains("Double")){
                         try {
 
 

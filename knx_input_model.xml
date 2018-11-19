@@ -2,53 +2,49 @@
 
 <tag_based_concept xmlns="http://knx.org">
 
-	<vocabulary>
-	
-	<marker name="unit" />
-	<marker name="value" />
-	<marker name="valueReal" />
-	<marker name="datapoint" />
-	<marker name="property" />
-	<marker name="device" />
+    <vocabulary>
 
-	<basic name="id" type="string"/>
-	<basic name="name" type="string"/>
-	<basic name="kelvin" type="int"/>
-	<basic name="Symbol" type="string"/>
-	<basic name="offset" type="string"/>
-	<basic name="min" type="int"/>
-	<basic name="max" type="int"/>
-	<basic name="serialnumber" type="string"/>
+    <marker name="unit" />
+    <marker name="value" />
+    <marker name="datapoint" />
+    <marker name="device" />
 
-	<reference name="unitRef" usedwith="celsius"/>
-	<reference name="valueRef" usedwith="value"/>
-	<reference name="typeRef" usedwith="type"/>
-	<reference name="propertyRef" usedwith="property"/>
-	<reference name="datapointRef" usedwith="datapoint"/>
+    <basic name="id" type="string"/>
+    <basic name="name" type="string"/>
+    <basic name="groupAddress" type="String" />
+    <basic name="valueType" type="String" />
 
-	<composition tag="celsius" occurrence="many" usedwith="unit"/>
+    <reference name="valueRef" usedwith="value"/>
+    <reference name="datapointRef" usedwith="datapoint"/>
+
+    </vocabulary>
+
+    <informationmodel>
+
+    <entity>
+    <feature tag="id" value="thermometer"/>
+    <feature tag="device"/>
+    <feature tag="name" value="Room_thermometer"/>
+    <feature tag="datapointRef" value="temperature_dp"/>
+    </entity>
+
+    <entity>
+    <feature tag="id" value="temperature_dp"/>
+    <feature tag="datapoint"/>
+    <feature tag="name" value="room_temperature"/>
+    <feature tag="groupAddress" value="1/3/4"/>
+    <feature tag="valueRef" value="temperature"/>
+    </entity>
+
+    <entity>
+    <feature tag="id" value="temperature"/>
+    <feature tag="value" />
+    <feature tag="valueType" value="double"/>
+    </entity>
 
 
-	</vocabulary>
-	
-	<informationmodel>
-	
-	
-	
-	<entity>
-	<feature tag="id" value="temperature_dp"/>
-	<feature tag="datapoint"/>
-	<feature tag="name" value="Temperature temperature"/>
-	<feature tag="typeRef" value="temp_type"/>
-	<feature tag="groupAddress" value="1/3/4"/>
-	<feature tag="valueType" value="grad"/>
 
-   	 </entity>
-	
-	
+    </informationmodel>
 
-	
-	</informationmodel>
-	
-	
+
 </tag_based_concept>

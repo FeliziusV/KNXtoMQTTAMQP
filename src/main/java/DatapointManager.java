@@ -41,65 +41,67 @@ public class DatapointManager {
         this.prop=prop;
         for (Map.Entry<String, Entity_DTO> pair : tag_model.entrySet()) {
             Entity_DTO entity = pair.getValue();
-            if (entity.containsFeature("datapoint")) {
-                Log.info("Datapoint found");
-                Datapoint datapoint = new Datapoint(entity.getFeature("id"),entity.getFeature("groupAddress"),entity.getFeature("valueType"));
+            if (entity.containsFeature("device")) {
+                Log.info("device found");
+                Datapoint datapoint = new Datapoint(entity.getFeature("name"));
                 Log.info("new Datapoint created");
-                String topic = entity.getFeature("id");
+                String topic = entity.getFeature("name");
                 Log.info(topic);
-                boolean rec = true;
-                boolean change=false;
-                String search=entity.getFeature("id");
-                while (rec) {
-                    change=false;
+                String searchs=entity.getFeature("datapointRef");
+                boolean search=true;
+                while (search) {
                     for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
-                        Log.info("search "+search);
                         Entity_DTO entity2 = pair2.getValue();
-                        if (entity2.containsFeature("datapointRef")) {
-                            if (entity2.getFeature("datapointRef").contains(search)) {
-                                topic = entity2.getFeature("id") + "/" + topic;
-                                Log.info(topic);
-                                search = entity2.getFeature("id");
-                                Log.info(search);
-                                change=true;
+                        if (entity2.containsFeature("datapoint")) {
+                            if (entity2.getFeature("id").contains(searchs)) {
+                                topic = topic + "/" + entity2.getFeature("name");
+                                searchs = entity2.getFeature("valueRef");
+                                search = false;
+                                datapoint.setGroupAddress(entity2.getFeature("groupAddress"));
+                                continue;
 
                             }
                         }
-                        if (entity2.containsFeature("buildingPart")) {
-                            Log.info("ja");
-                            if (entity2.getFeature("buildingPart").contains(search)) {
-                                Log.info("ja2");
-                                topic = entity2.getFeature("id") + "/" + topic;
-                                Log.info(topic);
-                                search = entity2.getFeature("id");
-                                change=true;
-
-                            }
-                        }
-
-
-
                     }
-                    if(change==false){
-                        rec=false;
-                    }
-
                 }
+                search=true;
+                while (search) {
+                    for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
+                        Entity_DTO entity2 = pair2.getValue();
+                        if (entity2.containsFeature("value")) {
+                            if (entity2.getFeature("id").contains(searchs)) {
+
+
+                                datapoint.setDataType(entity2.getFeature("valueType"));
+                                search = false;
+                                continue;
+
+                            }
+                        }
+                    }
+                }
+
                 datapoint.setTopic(topic);
+                System.out.println(datapoint.getName());
+                System.out.println(datapoint.getTopic());
+                System.out.println(datapoint.getGroupAddress());
+                System.out.println(datapoint.getDataType());
+
+
                 DatapointMap.put(datapoint.getName(),datapoint);
             }
 
 
         }
 
-            if (prop.readProperties("mode").equals("MQTT")) {
-                MQTT=true;
+        if (prop.readProperties("mode").equals("MQTT")) {
+            MQTT=true;
 
-            }
-            if (prop.readProperties("mode").equals("AMQP")) {
-                AMQP=true;
+        }
+        if (prop.readProperties("mode").equals("AMQP")) {
+            AMQP=true;
 
-            }
+        }
 
 
 
@@ -112,11 +114,11 @@ public class DatapointManager {
     public void setUpConnection() throws Invalid_input_Exception, IoT_Connection_Exception,KNX_Connection_Exception {
 
         if(MQTT){
-                setUpMQTT();
+            setUpMQTT();
 
-            }
+        }
 
-   else {
+        else {
             setUpAMQP();
         }
 
@@ -168,23 +170,23 @@ public class DatapointManager {
     private void setUpAMQP() throws Invalid_input_Exception, IoT_Connection_Exception,KNX_Connection_Exception {
 
 
-           final String userName = prop.readProperties("AMQP_userName").trim();
-           final String password = prop.readProperties("AMQP_password").trim();
-           final String virtualHost = prop.readProperties("AMQP_virtualHost").trim();
-           final String hostName = prop.readProperties("AMQP_hostName").trim();
-           final  String portNumber = prop.readProperties("AMQP_port").trim();
-           String Local_IP=prop.readProperties("Local_Ip");
+        final String userName = prop.readProperties("AMQP_userName").trim();
+        final String password = prop.readProperties("AMQP_password").trim();
+        final String virtualHost = prop.readProperties("AMQP_virtualHost").trim();
+        final String hostName = prop.readProperties("AMQP_hostName").trim();
+        final  String portNumber = prop.readProperties("AMQP_port").trim();
+        String Local_IP=prop.readProperties("Local_Ip");
 
 
         ArrayList<String> topiclist=new ArrayList<String>();
-            for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
-                Datapoint datapoint = pair.getValue();
-                topiclist.add(datapoint.getTopic());
+        for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
+            Datapoint datapoint = pair.getValue();
+            topiclist.add(datapoint.getTopic());
 
-            }
+        }
 
 
-            AMQP_con = new AMQP_Communication(userName, password, virtualHost, hostName, Integer.parseInt(portNumber), topiclist);
+        AMQP_con = new AMQP_Communication(userName, password, virtualHost, hostName, Integer.parseInt(portNumber), topiclist);
 
         String KNX_host=prop.readProperties("KNX_host");
         KNX_con= new KNX_Communication(KNX_host,Local_IP);
@@ -229,24 +231,26 @@ public class DatapointManager {
     }
 
     public void readDatapoints() throws IoT_Connection_Exception,KNX_Connection_Exception {
-         for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
-             Datapoint datapoint=pair.getValue();
-             String value="";
-             if(datapoint.getDataType().equals("grad")) {
-                  value = datapoint.getName()+" device=KNXtoMQTTAMQP value=" + KNX_con.readDouble(datapoint.getGroupAddress());
-             }
-             else if(datapoint.getDataType().equals("boolean")) {
-                 value = datapoint.getName()+"device=KNXtoMQTTAMQP value=" + KNX_con.readBoolean(datapoint.getGroupAddress());
-             }
-             if(MQTT){
-                 publishMQTT(datapoint.getTopic(),value);
-             }
-             else{
-                 publishAMQP(datapoint.getTopic(),value);
-             }
-         }
+        for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
+            Datapoint datapoint=pair.getValue();
+            String value="";
+            if(datapoint.getDataType().equals("double")) {
+                value = datapoint.getName()+" device=KNXtoMQTTAMQP value=" + KNX_con.readDouble(datapoint.getGroupAddress());
+            }
+            else if(datapoint.getDataType().equals("boolean")) {
+                value = datapoint.getName()+"device=KNXtoMQTTAMQP value=" + KNX_con.readBoolean(datapoint.getGroupAddress());
+            }
+            else if(datapoint.getDataType().equals("String")){
+                value = datapoint.getName()+"device=KNXtoMQTTAMQP value=" + KNX_con.readString(datapoint.getGroupAddress());
+            }
+            if(MQTT){
+                publishMQTT(datapoint.getTopic(),value);
+            }
+            else{
+                publishAMQP(datapoint.getTopic(),value);
+            }
+        }
     }
 
 
 }
-

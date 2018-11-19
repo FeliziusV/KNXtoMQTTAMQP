@@ -100,6 +100,22 @@ public boolean readBoolean(String groupAddress) throws KNX_Connection_Exception{
         return value;
 
 }
+
+    public String readString(String groupAddress) throws KNX_Connection_Exception{
+        String value=null;
+        try{
+            value=pc.readString(new GroupAddress(groupAddress));
+        }
+        catch (KNXException e1){
+            throw new KNX_Connection_Exception(e1.getMessage());
+        }
+        catch (InterruptedException e2){
+            throw new KNX_Connection_Exception(e2.getMessage());
+
+        }
+        return value;
+
+    }
     /**
      * Methode to write boolean values from a KNX groupAddress
      *
@@ -137,6 +153,19 @@ public void writeDouble(String groupAddress, double value) throws  KNX_Connectio
 
         }
 }
+
+    public void writeString(String groupAddress, String value) throws  KNX_Connection_Exception{
+
+
+        try{
+            pc.write(new GroupAddress(groupAddress),value);
+
+        }
+        catch (KNXException e){
+            throw new KNX_Connection_Exception(e.getMessage());
+
+        }
+    }
 
 
 

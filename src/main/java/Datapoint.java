@@ -9,34 +9,41 @@
 //representation of a KNX datapoint
 public class Datapoint {
 
-private String name;
-private String topic;
-private String groupAddress;
-private String dataType;
+    private String name;
+    private String topic;
+    private String groupAddress;
+    private String dataType;
 
-    public Datapoint(String name, String groupAddress, String dataType){
+    public Datapoint(String name){
         this.name=name;
-        this.groupAddress = groupAddress;
-        this.dataType=dataType;
-        }
 
-        public String getName(){
+    }
+
+    public String getName(){
         return name;
-        }
+    }
 
-        public void setTopic(String topic){
+    public void setTopic(String topic){
         this.topic=topic;
-        }
+    }
 
-        public String getTopic(){
+    public String getTopic(){
         return topic;
-        }
+    }
 
     public String getGroupAddress() {
         return groupAddress;
     }
 
+    public void setGroupAddress(String groupAddress){
+        this.groupAddress=groupAddress;
+    }
+
     public String getDataType() {
         return dataType;
+    }
+
+    public void setDataType(String dataType){
+        this.dataType=dataType;
     }
 }
