@@ -40,58 +40,67 @@ public class DatapointManager {
 
         this.prop=prop;
         for (Map.Entry<String, Entity_DTO> pair : tag_model.entrySet()) {
-            Entity_DTO entity = pair.getValue();
-            if (entity.containsFeature("device")) {
-                Log.info("device found");
-                Datapoint datapoint = new Datapoint(entity.getFeature("name"));
-                Log.info("new Datapoint created");
-                String topic = entity.getFeature("name");
-                Log.info(topic);
-                String searchs=entity.getFeature("datapointRef");
-                boolean search=true;
-                while (search) {
-                    for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
-                        Entity_DTO entity2 = pair2.getValue();
-                        if (entity2.containsFeature("datapoint")) {
-                            if (entity2.getFeature("id").contains(searchs)) {
-                                topic = topic + "/" + entity2.getFeature("name");
-                                searchs = entity2.getFeature("valueRef");
-                                search = false;
-                                datapoint.setGroupAddress(entity2.getFeature("groupAddress"));
-                                continue;
+            try {
+                Entity_DTO entity = pair.getValue();
+                if (entity.containsFeature("device")) {
+                    Log.info("device found");
+                    Datapoint datapoint = new Datapoint(entity.getFeature("name"));
+                    Log.info("new Datapoint created");
+                    String topic = entity.getFeature("name");
+                    Log.info(topic);
+                    String searchs = entity.getFeature("datapointRef");
+                    boolean search = true;
+                    while (search) {
+                        for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
+                            Entity_DTO entity2 = pair2.getValue();
+                            if (entity2.containsFeature("datapoint")) {
+                                if (entity2.getFeature("id").contains(searchs)) {
+                                    topic = topic + "/" + entity2.getFeature("name");
+                                    searchs = entity2.getFeature("valueRef");
+                                    search = false;
+                                    datapoint.setGroupAddress(entity2.getFeature("groupAddress"));
+                                    continue;
 
+                                }
                             }
                         }
                     }
-                }
-                search=true;
-                while (search) {
-                    for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
-                        Entity_DTO entity2 = pair2.getValue();
-                        if (entity2.containsFeature("value")) {
-                            if (entity2.getFeature("id").contains(searchs)) {
+                    search = true;
+                    while (search) {
+                        for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
+                            Entity_DTO entity2 = pair2.getValue();
+                            if (entity2.containsFeature("value")) {
+                                if (entity2.getFeature("id").contains(searchs)) {
 
 
-                                datapoint.setDataType(entity2.getFeature("valueType"));
-                                search = false;
-                                continue;
+                                    datapoint.setDataType(entity2.getFeature("valueType"));
+                                    search = false;
+                                    continue;
 
+                                }
                             }
                         }
                     }
+
+                    datapoint.setTopic(topic);
+                    System.out.println(datapoint.getName());
+                    System.out.println(datapoint.getTopic());
+                    System.out.println(datapoint.getGroupAddress());
+                    System.out.println(datapoint.getDataType());
+
+
+                    DatapointMap.put(datapoint.getName(), datapoint);
                 }
 
-                datapoint.setTopic(topic);
-                System.out.println(datapoint.getName());
-                System.out.println(datapoint.getTopic());
-                System.out.println(datapoint.getGroupAddress());
-                System.out.println(datapoint.getDataType());
-
-
-                DatapointMap.put(datapoint.getName(),datapoint);
             }
-
-
+            catch (NullPointerException e){
+                Log.error("Invalid Datapoint");
+                continue;
+            }
+        }
+        if(DatapointMap.isEmpty()){
+            Log.error("no valid Datapoint found");
+            throw new Invalid_input_Exception("no valid Datapoint found");
         }
 
         if (prop.readProperties("mode").equals("MQTT")) {
@@ -158,8 +167,13 @@ public class DatapointManager {
         String Local_IP=prop.readProperties("Local_Ip");
         KNX_con= new KNX_Communication(KNX_host,Local_IP);
         mqtt_listener = new Thread(() -> {
-            new MQTT_Listener().subscribe("MQTT_input",MQTT_broker_url,KNX_con);
+            try {
+                new MQTT_Listener().subscribe("MQTT_input", MQTT_broker_url, KNX_con);
+            }
+            catch (IoT_Connection_Exception e){
 
+                Log.error(e.getMessage());
+            }
 
 
         });
@@ -191,7 +205,7 @@ public class DatapointManager {
         String KNX_host=prop.readProperties("KNX_host");
         KNX_con= new KNX_Communication(KNX_host,Local_IP);
         amqp_listener = new Thread(() -> {
-            AMQP_Listener al = new AMQP_Listener(userName, password, virtualHost, hostName, Integer.parseInt(portNumber), "test", KNX_con);
+            AMQP_Listener al = new AMQP_Listener(userName, password, virtualHost, hostName, Integer.parseInt(portNumber), "AMQP_input", KNX_con);
 
 
 
@@ -206,12 +220,14 @@ public class DatapointManager {
      *
      */
     public void disconnect() throws Invalid_input_Exception, IoT_Connection_Exception {
+        Log.info("hier");
 
         if(MQTT){
             MQTT_con.disconnect();
             KNX_con.disconnect();
         }
-        if(AMQP){
+        else{
+            Log.info("now");
             AMQP_con.disconnect();
             KNX_con.disconnect();
 

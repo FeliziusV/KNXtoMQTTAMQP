@@ -7,6 +7,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import Exception.*;
+
 
 
 public class MQTT_Listener implements MqttCallback {
@@ -16,7 +18,7 @@ public class MQTT_Listener implements MqttCallback {
     private final Logger Log = LoggerFactory.getLogger(Main.class);
 
 
-    public void subscribe(String topic, String brokerUrl,KNX_Communication knx_con) {
+    public void subscribe(String topic, String brokerUrl,KNX_Communication knx_con) throws IoT_Connection_Exception {
         this.knx_con=knx_con;
 
         MemoryPersistence persistence = new MemoryPersistence();
@@ -41,11 +43,7 @@ public class MQTT_Listener implements MqttCallback {
 
         } catch (MqttException me) {
 
-            Log.info("Mqtt reason " + me.getReasonCode());
-            Log.info("Mqtt msg " + me.getMessage());
-            Log.info("Mqtt loc " + me.getLocalizedMessage());
-            Log.info("Mqtt cause " + me.getCause());
-            Log.info("Mqtt excep " + me);
+            throw new IoT_Connection_Exception(me.getMessage());
         }
     }
 
@@ -59,7 +57,7 @@ public class MQTT_Listener implements MqttCallback {
     }
 
 
-    public void messageArrived(String topic, MqttMessage message) throws Exception {
+    public void messageArrived(String topic, MqttMessage message) throws KNX_Connection_Exception {
 
 
         Log.info("Mqtt msg : " + message.toString());

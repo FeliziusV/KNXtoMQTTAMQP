@@ -1,10 +1,7 @@
 import com.rabbitmq.client.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import  Exception.*;
-
 import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 public class AMQP_Listener {
     private final Logger Log = LoggerFactory.getLogger(Main.class);
@@ -32,6 +29,7 @@ public class AMQP_Listener {
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
 
                         throws IOException {
+                    Log.info("begin to listen!!!");
 
                     String message = new String(body, "UTF-8");
 
@@ -60,7 +58,7 @@ public class AMQP_Listener {
 
                         }
                     }
-                    else if (datatype.contains("Double")){
+                    else if (datatype.contains("double")){
                         try {
 
 
@@ -70,6 +68,7 @@ public class AMQP_Listener {
 
                         }
                     }
+                    Log.info("ends to listen!!!");
 
                 }
 

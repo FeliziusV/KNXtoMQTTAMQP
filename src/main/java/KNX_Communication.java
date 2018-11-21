@@ -177,6 +177,7 @@ public void writeDouble(String groupAddress, double value) throws  KNX_Connectio
 public void disconnect() {
         pc.close();
         knxLink.close();
+        Log.info("connection closed");
 
     }
 
