@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import Exception.*;
+import org.w3c.dom.NamedNodeMap;
 
 
 public class DatapointManager {
@@ -36,67 +37,44 @@ public class DatapointManager {
      * @exception Invalid_input_Exception  throws if an error occurs during the reading process
      */
 
-    public DatapointManager(HashMap<String, Entity_DTO> tag_model,PropertiesManager prop ) throws Invalid_input_Exception {
+    public DatapointManager(HashMap<String, NamedNodeMap> tag_model, PropertiesManager prop ) throws Invalid_input_Exception {
 
         this.prop=prop;
-        for (Map.Entry<String, Entity_DTO> pair : tag_model.entrySet()) {
-            try {
-                Entity_DTO entity = pair.getValue();
-                if (entity.containsFeature("device")) {
-                    Log.info("device found");
-                    Datapoint datapoint = new Datapoint(entity.getFeature("name"));
-                    Log.info("new Datapoint created");
-                    String topic = entity.getFeature("name");
-                    Log.info(topic);
-                    String searchs = entity.getFeature("datapointRef");
-                    boolean search = true;
-                    while (search) {
-                        for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
-                            Entity_DTO entity2 = pair2.getValue();
-                            if (entity2.containsFeature("datapoint")) {
-                                if (entity2.getFeature("id").contains(searchs)) {
-                                    topic = topic + "/" + entity2.getFeature("name");
-                                    searchs = entity2.getFeature("valueRef");
-                                    search = false;
-                                    datapoint.setGroupAddress(entity2.getFeature("groupAddress"));
-                                    continue;
+        for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
+            NamedNodeMap attributesList=pair.getValue();
+            String id=null;
+            String address=null;
+            String datapointRef=null;
+            String topic=null;
+            String datatype=null;
 
-                                }
-                            }
-                        }
+            for (int j = 0; j < attributesList.getLength(); j++) {
+
+
+                    if(attributesList.item(j).getNodeName().equals("id")){
+                        id=attributesList.item(j).getNodeValue();
                     }
-                    search = true;
-                    while (search) {
-                        for (Map.Entry<String, Entity_DTO> pair2 : tag_model.entrySet()) {
-                            Entity_DTO entity2 = pair2.getValue();
-                            if (entity2.containsFeature("value")) {
-                                if (entity2.getFeature("id").contains(searchs)) {
+                    if(attributesList.item(j).getNodeName().equals("groupAddress")){
+                        address=attributesList.item(j).getNodeValue();
+                    }
+                     if(attributesList.item(j).getNodeName().equals("datapointRef")){
+                    address=attributesList.item(j).getNodeValue();
+                      }
 
 
-                                    datapoint.setDataType(entity2.getFeature("valueType"));
-                                    search = false;
-                                    continue;
-
-                                }
-                            }
-                        }
                     }
 
-                    datapoint.setTopic(topic);
-                    System.out.println(datapoint.getName());
-                    System.out.println(datapoint.getTopic());
-                    System.out.println(datapoint.getGroupAddress());
-                    System.out.println(datapoint.getDataType());
+                    if(datapointRef!=null){
+                        NamedNodeMap attributesList2=tag_model.get("datapointRef");
+                        for (int jj = 0; jj < attributesList.getLength(); jj++) {
 
+                            if(attributesList2.item(jj).getNodeName().equals("id")){
+                                id=attributesList.item(jj).getNodeValue();
+                            }
+                        }
 
-                    DatapointMap.put(datapoint.getName(), datapoint);
-                }
+                    }
 
-            }
-            catch (NullPointerException e){
-                Log.error("Invalid Datapoint");
-                continue;
-            }
         }
         if(DatapointMap.isEmpty()){
             Log.error("no valid Datapoint found");

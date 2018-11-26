@@ -13,8 +13,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import  Exception.*;
-
-
+import org.w3c.dom.NamedNodeMap;
 
 
 public class Main {
@@ -29,7 +28,7 @@ public class Main {
         XMLReader xmlReader = new XMLReader();
 
         try {
-            HashMap<String, Entity_DTO> tag_model = xmlReader.readConfig("knx_input_model.xml");
+            HashMap<String, NamedNodeMap> tag_model = xmlReader.readConfig("knx_input_model.xml");
 
             PropertiesManager prop = new PropertiesManager("KNXtoMQTTAMQP.config");
             DatapointManager datapointManager = new DatapointManager(tag_model, prop);

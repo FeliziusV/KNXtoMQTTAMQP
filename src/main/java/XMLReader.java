@@ -21,7 +21,7 @@ public class XMLReader {
      *@return entities  Hashmap containing all entities of the XML File
      @exception Invalid_input_Exception  throws if an error occurs during the reading process
      */
-    public HashMap<String, Entity_DTO> readConfig(String xmlFileLocation) throws Invalid_input_Exception {
+    public HashMap<String, NamedNodeMap> readConfig(String xmlFileLocation) throws Invalid_input_Exception {
         try {
             File inputFile = new File(xmlFileLocation);
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -31,16 +31,17 @@ public class XMLReader {
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("entity");
             Log.info(nList.getLength()+" Entities found");
-            HashMap<String, Entity_DTO> entities=new HashMap<String,Entity_DTO>();
+            HashMap<String, NamedNodeMap> entities=new HashMap<String,NamedNodeMap>();
 
             for (int temp = 0; temp < nList.getLength(); temp++) {
-                Log.info("Entity nr 1");
 
                 Node nNode = nList.item(temp);
-                NodeList child= nNode.getChildNodes();
-                Log.info(""+child.getLength());
-                Entity_DTO entity=new Entity_DTO();
-                String id=null;
+               NamedNodeMap nmap=nNode.getAttributes();
+              String[] idx=nmap.getNamedItem("id").toString().split("=");
+              String id=idx[1];
+               // NodeList child= nNode.getChildNodes();
+                //Log.info(""+child.getLength());
+                /*
                 for (int temp2 = 0; temp2 < child.getLength(); temp2++) {
                     Node childnode = child.item(temp2);
                     if (childnode.getNodeType() == Node.ELEMENT_NODE) {
@@ -56,7 +57,9 @@ public class XMLReader {
                         }
                     }
                 }
-                entities.put(id,entity);
+                */
+
+                entities.put(id,nmap);
 
             }
             return  entities;
