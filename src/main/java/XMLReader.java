@@ -33,6 +33,7 @@ public class XMLReader {
             Log.info(nList.getLength()+" Entities found");
             HashMap<String, NamedNodeMap> entities=new HashMap<String,NamedNodeMap>();
 
+
             for (int temp = 0; temp < nList.getLength(); temp++) {
 
                 Node nNode = nList.item(temp);
@@ -59,6 +60,8 @@ public class XMLReader {
                 }
                 */
 
+                id=id.replaceAll("^\"|\"$", "");
+                Log.info("x"+id+"x");
                 entities.put(id,nmap);
 
             }

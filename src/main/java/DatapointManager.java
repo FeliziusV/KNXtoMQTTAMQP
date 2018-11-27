@@ -41,41 +41,78 @@ public class DatapointManager {
 
         this.prop=prop;
         for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
-            NamedNodeMap attributesList=pair.getValue();
+            System.out.println(pair.getKey());
+            NamedNodeMap map=pair.getValue();
+            System.out.println(map.getLength());
+
             String id=null;
             String address=null;
             String datapointRef=null;
             String topic=null;
             String datatype=null;
+            String readable=null;
 
-            for (int j = 0; j < attributesList.getLength(); j++) {
+
+            for (int j = 0; j < map.getLength(); j++) {
+                System.out.println(map.item(j).getNodeName()+":"+map.item(j).getNodeValue());
+
+                if(map.item(j).getNodeName().contains("id")){
+                    id=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+                }
+                if(map.item(j).getNodeName().contains("groupAddress")){
+                    address=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+                if(map.item(j).getNodeName().contains("datapointRef")){
+                    datapointRef=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+                if(map.item(j).getNodeName().contains("readable")){
+                    readable=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
 
 
-                    if(attributesList.item(j).getNodeName().equals("id")){
-                        id=attributesList.item(j).getNodeValue();
+
+
+
+
+            }
+            System.out.println(id);
+            System.out.println(address);
+            System.out.println(datapointRef);
+            if(datapointRef!=null&&readable!=null) {
+                if(datapointRef.length()<=6&&readable.contains("true")){
+
+
+                Log.info("x"+datapointRef+"x");
+                NamedNodeMap map2 = tag_model.get(datapointRef);
+                for (int jj = 0; jj < map2.getLength(); jj++) {
+                    if (map2.item(jj).getNodeName().contains("name")) {
+                        topic = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
                     }
-                    if(attributesList.item(j).getNodeName().equals("groupAddress")){
-                        address=attributesList.item(j).getNodeValue();
-                    }
-                     if(attributesList.item(j).getNodeName().equals("datapointRef")){
-                    address=attributesList.item(j).getNodeValue();
-                      }
+                    if (map2.item(jj).getNodeName().contains("description")) {
+                        String d = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
+                        if (d.contains("Ein / Aus")) {
+                            datatype = "boolean";
 
+                        } else {
+                            datatype = "double";
 
-                    }
-
-                    if(datapointRef!=null){
-                        NamedNodeMap attributesList2=tag_model.get("datapointRef");
-                        for (int jj = 0; jj < attributesList.getLength(); jj++) {
-
-                            if(attributesList2.item(jj).getNodeName().equals("id")){
-                                id=attributesList.item(jj).getNodeValue();
-                            }
                         }
-
                     }
+                }
+                }
+                System.out.println(topic);
+                System.out.println(datatype);
+                DatapointMap.put(id,new Datapoint(id,topic,address,datatype));
+
+
+            }
+
 
         }
+
         if(DatapointMap.isEmpty()){
             Log.error("no valid Datapoint found");
             throw new Invalid_input_Exception("no valid Datapoint found");
@@ -173,6 +210,7 @@ public class DatapointManager {
         ArrayList<String> topiclist=new ArrayList<String>();
         for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
             Datapoint datapoint = pair.getValue();
+
             topiclist.add(datapoint.getTopic());
 
         }

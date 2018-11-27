@@ -18,6 +18,13 @@ public class Datapoint {
         this.name=name;
 
     }
+    public Datapoint(String name, String topic, String groupAddress, String dataType){
+        this.name=name;
+        this.topic=topic;
+        this.groupAddress=groupAddress;
+        this.dataType=dataType;
+
+    }
 
     public String getName(){
         return name;
