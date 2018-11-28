@@ -40,6 +40,49 @@ public class DatapointManager {
     public DatapointManager(HashMap<String, NamedNodeMap> tag_model, PropertiesManager prop ) throws Invalid_input_Exception {
 
         this.prop=prop;
+
+        HashMap<String,String>devicelist=new HashMap<String,String>();
+
+        for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
+            NamedNodeMap map=pair.getValue();
+            String datapointRef=null;
+            String device=null;
+            String name=null;
+
+
+            for (int j = 0; j < map.getLength(); j++) {
+
+                if(map.item(j).getNodeName().contains("device")){
+                    device=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+                }
+                if(map.item(j).getNodeName().contains("datapointRef")){
+                    datapointRef=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+                if(map.item(j).getNodeName().contains("name")){
+                    name=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+
+            }
+            if(device!=null){
+                System.out.println(datapointRef);
+
+                name=name.replaceAll("\\s+","");
+                name=name.replace("-","");
+                name=name.replace("\\\\\\","");
+                name=name.replace("/","");
+
+                String[]devices=datapointRef.split("\\|");
+                for(int i=0;i<devices.length;i++){
+                    System.out.println(devices[i]);
+                    devicelist.put(devices[i],name);
+                }
+            }
+
+        }
+
+
         for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
             System.out.println(pair.getKey());
             NamedNodeMap map=pair.getValue();
@@ -85,32 +128,46 @@ public class DatapointManager {
                 if(datapointRef.length()<=6&&readable.contains("true")){
 
 
-                Log.info("x"+datapointRef+"x");
-                NamedNodeMap map2 = tag_model.get(datapointRef);
-                for (int jj = 0; jj < map2.getLength(); jj++) {
-                    if (map2.item(jj).getNodeName().contains("name")) {
-                        topic = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
-                    }
-                    if (map2.item(jj).getNodeName().contains("description")) {
-                        String d = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
-                        if (d.contains("Ein / Aus")) {
-                            datatype = "boolean";
-
-                        } else {
-                            datatype = "double";
-
+                    Log.info("x"+datapointRef+"x");
+                    NamedNodeMap map2 = tag_model.get(datapointRef);
+                    for (int jj = 0; jj < map2.getLength(); jj++) {
+                        if (map2.item(jj).getNodeName().contains("name")) {
+                            topic = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
                         }
-                    }
-                }
-                }
-                System.out.println(topic);
-                System.out.println(datatype);
-                DatapointMap.put(id,new Datapoint(id,topic,address,datatype));
 
+                        if (map2.item(jj).getNodeName().contains("description")) {
+                            String d = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
+                            if (d.contains("Ein / Aus")) {
+                                datatype = "boolean";
+
+                            } else {
+                                datatype = "String";
+
+                            }
+                        }
+
+                    }
+
+                    System.out.println(topic);
+                    topic=topic.replaceAll("\\s+","");
+                    topic=topic.replace("-","");
+                    topic=topic.replace("\\\\\\","");
+                    topic=topic.replace("/","");
+
+                    System.out.println(datatype);
+
+
+                    DatapointMap.put(id,new Datapoint(id,devicelist.get(datapointRef)+"/"+topic,address,datatype));
+                }
 
             }
 
 
+
+        }
+        for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
+            Datapoint datapoint = pair.getValue();
+            System.out.println(datapoint);
         }
 
         if(DatapointMap.isEmpty()){

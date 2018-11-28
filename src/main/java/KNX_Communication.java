@@ -53,6 +53,31 @@ public  class KNX_Communication {
      * @exception KNX_Connection_Exception  if an Connection error occurs
      */
 
+    public int readControl(String groupAddress) throws KNX_Connection_Exception{
+       int value=0;
+        try {
+            Log.info("reading double value from datapoint " + groupAddress);
+
+           value = pc.readControl(new GroupAddress(groupAddress));
+
+            Log.info("datapoint " + groupAddress + " value = " + value);
+
+        } catch (KNXFormatException e1) {
+            throw new KNX_Connection_Exception(e1.getMessage());
+
+
+        }
+        catch (KNXException e2){
+            throw new KNX_Connection_Exception(e2.getMessage());
+
+
+        }
+        catch (InterruptedException e3){
+            throw new KNX_Connection_Exception(e3.getMessage());
+
+        }
+        return value;
+    }
     public double readDouble(String groupAddress) throws KNX_Connection_Exception {
         double value=0;
         try {
@@ -104,6 +129,7 @@ public boolean readBoolean(String groupAddress) throws KNX_Connection_Exception{
     public String readString(String groupAddress) throws KNX_Connection_Exception{
         String value=null;
         try{
+            Log.info(groupAddress);
             value=pc.readString(new GroupAddress(groupAddress));
         }
         catch (KNXException e1){
@@ -134,6 +160,7 @@ public void writeBoolean(String groupAddress, boolean value) throws  KNX_Connect
     }
 
 }
+
     /**
      * Methode to write boolean values from a KNX groupAddress
      *

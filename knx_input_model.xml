@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project version="0.4">
  
-  <entity id="A-10-2" datapointRef="115_0" groupAddress="1/0/1" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
   <entity id="A-70-0" datapointRef="115_0" groupAddress="1/3/7" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
   <entity id="115_0" name="Komfortbetrieb" description="Ein / Aus" datapoint="true" />
   <entity id="A-68-1" datapointRef="115_5" groupAddress="1/3/5" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
@@ -20,7 +19,6 @@
   <entity id="115_3" name="Taupunktbetrieb" description="Ein / Aus" datapoint="true" />
   <entity id="A-77-0" datapointRef="115_4" groupAddress="1/3/14" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
   <entity id="115_4" name="Taster" description="Ein / Aus" datapoint="true" />
-  <entity id="A-64-1" datapointRef="115_7" groupAddress="1/3/1" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
   <entity id="115_7" name="Stellgröße Heizen" description="stetig" datapoint="true" />
   <entity id="A-66-1" datapointRef="115_8" groupAddress="1/3/3" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
   <entity id="115_8" name="Stellgröße Kühlen" description="stetig" datapoint="true" />

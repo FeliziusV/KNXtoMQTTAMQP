@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project version="0.4">
+  <entity id="107" name="Spannungsversorgung N 125/21 (230V/640mA)" orderNumber="5WG1 125-1AB21  " serialNumber="" device="true" />
+  <entity id="P-01" name="Normal" literal="true" priority="true" />
+  <entity id="priority" name="Priority" literalRef="P-01|P-02|P-03|P-04" enumeration="true" />
+  <entity id="P-02" name="High" literal="true" priority="true" />
+  <entity id="P-03" name="Alarm" literal="true" priority="true" />
+  <entity id="P-04" name="System" literal="true" priority="true" />
+  <entity id="A-72-0" datapointRef="109_4" groupAddress="1/3/9" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="109_4" name="Schalten, Eingang C" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-11-0" datapointRef="109_6" groupAddress="1/0/2" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="109_6" name="Schalten, Eingang D" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-17-0" datapointRef="109_0|108_60" groupAddress="1/1/4" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="109_0" name="Dimmen Um, Eingang A" description="Um" datapoint="true" />
+  <entity id="A-23-0" datapointRef="109_1|108_61" groupAddress="1/1/14" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="109_1" name="Dimmen, Eingang A" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-18-0" datapointRef="109_2|108_70" groupAddress="1/1/5" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="109_2" name="Dimmen Um, Eingang B" description="Um" datapoint="true" />
+  <entity id="A-24-0" datapointRef="109_3|108_71" groupAddress="1/1/15" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="109_3" name="Dimmen, Eingang B" description="Heller / Dunkler" datapoint="true" />
+  <entity id="M-0001" name="Siemens" manufacturer="true" />
+  <entity id="109" name="Taster-Schnittstelle UP 220/02" orderNumber="5WG1 220-2AB02" serialNumber="" datapointRef="109_4|109_6|109_0|109_1|109_2|109_3" manufacturerRef="M-0001" device="true" />
+  <entity id="A-9-0" datapointRef="116_1|116_6|116_11|116_16|116_21|116_26|124_12|124_19" groupAddress="1/0/0" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-10-0" datapointRef="116_1|116_6|116_11" groupAddress="1/0/1" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-13-0" datapointRef="116_1" groupAddress="1/1/0" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-40-0" datapointRef="116_1|116_6|116_11|116_16|116_21|116_26|124_12|124_19" groupAddress="1/1/200" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_1" name="Dimmen E/A, Kanal A" description="Ein / Aus" datapoint="true" />
+  <entity id="A-19-0" datapointRef="116_3" groupAddress="1/1/10" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_3" name="Dimmen, Kanal A" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-27-0" datapointRef="116_4" groupAddress="1/1/20" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_4" name="Wert, Kanal A" description="8-bit Wert" datapoint="true" />
+  <entity id="A-33-0" datapointRef="116_5" groupAddress="1/1/40" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_5" name="Status Wert, Kanal A" description="8-bit Wert" datapoint="true" />
+  <entity id="116_0" name="Nachtbetrieb" description="Ein / Aus" datapoint="true" />
+  <entity id="A-41-0" datapointRef="116_2" groupAddress="1/1/30" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_2" name="Status Dimmen E/A, Kanal A" description="Ein / Aus" datapoint="true" />
+  <entity id="A-14-0" datapointRef="116_6" groupAddress="1/1/1" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_6" name="Dimmen E/A, Kanal B" description="Ein / Aus" datapoint="true" />
+  <entity id="A-42-0" datapointRef="116_7" groupAddress="1/1/31" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_7" name="Status Dimmen E/A, Kanal B" description="Ein / Aus" datapoint="true" />
+  <entity id="A-20-0" datapointRef="116_8" groupAddress="1/1/11" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_8" name="Dimmen, Kanal B" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-28-0" datapointRef="116_9" groupAddress="1/1/21" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_9" name="Wert, Kanal B" description="8-bit Wert" datapoint="true" />
+  <entity id="A-34-0" datapointRef="116_10" groupAddress="1/1/41" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_10" name="Status Wert, Kanal B" description="8-bit Wert" datapoint="true" />
+  <entity id="A-15-0" datapointRef="116_11" groupAddress="1/1/2" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_11" name="Dimmen E/A, Kanal C" description="Ein / Aus" datapoint="true" />
+  <entity id="A-43-0" datapointRef="116_12" groupAddress="1/1/32" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_12" name="Status Dimmen E/A, Kanal C" description="Ein / Aus" datapoint="true" />
+  <entity id="A-21-0" datapointRef="116_13" groupAddress="1/1/12" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_13" name="Dimmen, Kanal C" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-29-0" datapointRef="116_14" groupAddress="1/1/22" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_14" name="Wert, Kanal C" description="8-bit Wert" datapoint="true" />
+  <entity id="A-35-0" datapointRef="116_15" groupAddress="1/1/42" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_15" name="Status Wert, Kanal C" description="8-bit Wert" datapoint="true" />
+  <entity id="A-16-0" datapointRef="116_16" groupAddress="1/1/3" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_16" name="Dimmen E/A, Kanal D" description="Ein / Aus" datapoint="true" />
+  <entity id="A-44-0" datapointRef="116_17" groupAddress="1/1/33" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_17" name="Status Dimmen E/A, Kanal D" description="Ein / Aus" datapoint="true" />
+  <entity id="A-22-0" datapointRef="116_18" groupAddress="1/1/13" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_18" name="Dimmen, Kanal D" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-30-0" datapointRef="116_19" groupAddress="1/1/23" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_19" name="Wert, Kanal D" description="8-bit Wert" datapoint="true" />
+  <entity id="A-36-0" datapointRef="116_20" groupAddress="1/1/43" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_20" name="Status Wert, Kanal D" description="8-bit Wert" datapoint="true" />
+  <entity id="A-31-0" datapointRef="116_24" groupAddress="1/1/24" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_24" name="Wert, Kanal E" description="8-bit Wert" datapoint="true" />
+  <entity id="A-37-0" datapointRef="116_25" groupAddress="1/1/44" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_25" name="Status Wert, Kanal E" description="8-bit Wert" datapoint="true" />
+  <entity id="A-17-1" datapointRef="116_21" groupAddress="1/1/4" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-25-0" datapointRef="116_21|116_26" groupAddress="1/1/201" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_21" name="Dimmen E/A, Kanal E" description="Ein / Aus" datapoint="true" />
+  <entity id="A-45-0" datapointRef="116_22" groupAddress="1/1/34" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_22" name="Status Dimmen E/A, Kanal E" description="Ein / Aus" datapoint="true" />
+  <entity id="A-23-1" datapointRef="116_23" groupAddress="1/1/14" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-26-0" datapointRef="116_23|116_28" groupAddress="1/1/202" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_23" name="Dimmen, Kanal E" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-32-0" datapointRef="116_29" groupAddress="1/1/25" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_29" name="Wert, Kanal F" description="8-bit Wert" datapoint="true" />
+  <entity id="A-38-0" datapointRef="116_30" groupAddress="1/1/45" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_30" name="Status Wert, Kanal F" description="8-bit Wert" datapoint="true" />
+  <entity id="A-18-1" datapointRef="116_26" groupAddress="1/1/5" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_26" name="Dimmen E/A, Kanal F" description="Ein / Aus" datapoint="true" />
+  <entity id="A-46-0" datapointRef="116_27" groupAddress="1/1/35" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_27" name="Status Dimmen E/A, Kanal F" description="Ein / Aus" datapoint="true" />
+  <entity id="A-24-1" datapointRef="116_28" groupAddress="1/1/15" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_28" name="Dimmen, Kanal F" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-74-0" datapointRef="116_35" groupAddress="1/3/11" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_35" name="Status Wert, Kanal G" description="8-bit Wert" datapoint="true" />
+  <entity id="A-63-0" datapointRef="116_31" groupAddress="1/3/0" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_31" name="Dimmen E/A, Kanal G" description="Ein / Aus" datapoint="true" />
+  <entity id="A-73-0" datapointRef="116_32" groupAddress="1/3/10" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_32" name="Status Dimmen E/A, Kanal G" description="Ein / Aus" datapoint="true" />
+  <entity id="116_33" name="Dimmen, Kanal G" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-64-0" datapointRef="116_34" groupAddress="1/3/1" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_34" name="Wert, Kanal G" description="8-bit Wert" datapoint="true" />
+  <entity id="A-76-0" datapointRef="116_40" groupAddress="1/3/13" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_40" name="Status Wert, Kanal H" description="8-bit Wert" datapoint="true" />
+  <entity id="A-65-0" datapointRef="116_36" groupAddress="1/3/2" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_36" name="Dimmen E/A, Kanal H" description="Ein / Aus" datapoint="true" />
+  <entity id="A-75-0" datapointRef="116_37" groupAddress="1/3/12" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_37" name="Status Dimmen E/A, Kanal H" description="Ein / Aus" datapoint="true" />
+  <entity id="116_38" name="Dimmen, Kanal H" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-66-0" datapointRef="116_39" groupAddress="1/3/3" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="116_39" name="Wert, Kanal H" description="8-bit Wert" datapoint="true" />
+  <entity id="116" name="Schalt- / Dimmaktor N 526E" orderNumber="5WG1 526-1EB01" serialNumber="" datapointRef="116_1|116_3|116_4|116_5|116_0|116_2|116_6|116_7|116_8|116_9|116_10|116_11|116_12|116_13|116_14|116_15|116_16|116_17|116_18|116_19|116_20|116_24|116_25|116_21|116_22|116_23|116_29|116_30|116_26|116_27|116_28|116_35|116_31|116_32|116_33|116_34|116_40|116_36|116_37|116_38|116_39" manufacturerRef="M-0001" device="true" />
+  <entity id="A-81-0" datapointRef="119_80" groupAddress="1/4/0" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_80" name="Zeit" description="Wert (EIS 3)" datapoint="true" />
+  <entity id="A-82-0" datapointRef="119_81" groupAddress="1/4/1" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_81" name="Datum" description="Wert (EIS 4)" datapoint="true" />
+  <entity id="119_82" name="Status" description="Status" datapoint="true" />
+  <entity id="A-14-1" datapointRef="119_1" groupAddress="1/1/1" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_1" name="Objekt 1" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-13-1" datapointRef="119_0" groupAddress="1/1/0" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_0" name="Objekt 0" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-15-1" datapointRef="119_2" groupAddress="1/1/2" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_2" name="Objekt 2" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-16-1" datapointRef="119_3" groupAddress="1/1/3" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_3" name="Objekt 3" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-17-2" datapointRef="119_4" groupAddress="1/1/4" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_4" name="Objekt 4" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-18-2" datapointRef="119_5" groupAddress="1/1/5" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_5" name="Objekt 5" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_6" name="Objekt 6" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_7" name="Objekt 7" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_8" name="Objekt 8" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_9" name="Objekt 9" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-49-0" datapointRef="119_11" groupAddress="1/2/1" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_11" name="Objekt 11" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-48-0" datapointRef="119_10" groupAddress="1/2/0" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_10" name="Objekt 10" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_12" name="Objekt 12" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_14" name="Objekt 14" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_13" name="Objekt 13" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_15" name="Objekt 15" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_16" name="Objekt 16" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_17" name="Objekt 17" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_18" name="Objekt 18" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_19" name="Objekt 19" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_22" name="Objekt 22" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_24" name="Objekt 24" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_23" name="Objekt 23" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_25" name="Objekt 25" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_26" name="Objekt 26" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_27" name="Objekt 27" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_28" name="Objekt 28" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_29" name="Objekt 29" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_21" name="Objekt 21" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_20" name="Objekt 20" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="A-69-0" datapointRef="119_32" groupAddress="1/3/6" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_32" name="Objekt 32" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_34" name="Objekt 34" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_33" name="Objekt 33" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_35" name="Objekt 35" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_36" name="Objekt 36" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_37" name="Objekt 37" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_38" name="Objekt 38" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_39" name="Objekt 39" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="A-68-0" datapointRef="119_31" groupAddress="1/3/5" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_31" name="Objekt 31" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="A-67-0" datapointRef="119_30" groupAddress="1/3/4" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="119_30" name="Objekt 30" description="2 Byte Fließkomma (EIS 5)" datapoint="true" />
+  <entity id="119_42" name="Objekt 42" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_44" name="Objekt 44" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_43" name="Objekt 43" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_45" name="Objekt 45" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_46" name="Objekt 46" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_47" name="Objekt 47" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_48" name="Objekt 48" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_49" name="Objekt 49" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_41" name="Objekt 41" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_40" name="Objekt 40" description="1 Byte ohne Vorz. (EIS 14)" datapoint="true" />
+  <entity id="119_52" name="Objekt 52" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_54" name="Objekt 54" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_53" name="Objekt 53" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_55" name="Objekt 55" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_56" name="Objekt 56" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_57" name="Objekt 57" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_58" name="Objekt 58" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_59" name="Objekt 59" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_51" name="Objekt 51" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_50" name="Objekt 50" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_62" name="Objekt 62" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_64" name="Objekt 64" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_63" name="Objekt 63" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_65" name="Objekt 65" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_66" name="Objekt 66" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_67" name="Objekt 67" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_68" name="Objekt 68" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_69" name="Objekt 69" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_61" name="Objekt 61" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_60" name="Objekt 60" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_77" name="Objekt 77" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_78" name="Objekt 78" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_79" name="Objekt 79" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_71" name="Objekt 71" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_70" name="Objekt 70" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_72" name="Objekt 72" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_74" name="Objekt 74" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_73" name="Objekt 73" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_75" name="Objekt 75" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119_76" name="Objekt 76" description="1 Bit (EIS 1)" datapoint="true" />
+  <entity id="119" name="IP Controller N 350E" orderNumber="5WG1 350-1EB01" serialNumber="" datapointRef="119_80|119_81|119_82|119_1|119_0|119_2|119_3|119_4|119_5|119_6|119_7|119_8|119_9|119_11|119_10|119_12|119_14|119_13|119_15|119_16|119_17|119_18|119_19|119_22|119_24|119_23|119_25|119_26|119_27|119_28|119_29|119_21|119_20|119_32|119_34|119_33|119_35|119_36|119_37|119_38|119_39|119_31|119_30|119_42|119_44|119_43|119_45|119_46|119_47|119_48|119_49|119_41|119_40|119_52|119_54|119_53|119_55|119_56|119_57|119_58|119_59|119_51|119_50|119_62|119_64|119_63|119_65|119_66|119_67|119_68|119_69|119_61|119_60|119_77|119_78|119_79|119_71|119_70|119_72|119_74|119_73|119_75|119_76" manufacturerRef="M-0001" device="true" />
+  <entity id="A-13-2" datapointRef="121_0" groupAddress="1/1/0" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_0" name="Kanal A, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-14-2" datapointRef="121_4" groupAddress="1/1/1" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_4" name="Kanal B, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-16-2" datapointRef="121_12|118_0" groupAddress="1/1/3" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_12" name="Kanal D, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-15-2" datapointRef="121_8" groupAddress="1/1/2" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_8" name="Kanal C, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-18-3" datapointRef="121_20" groupAddress="1/1/5" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_20" name="Kanal F, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-17-3" datapointRef="121_16" groupAddress="1/1/4" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_16" name="Kanal E, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-65-1" datapointRef="121_28" groupAddress="1/3/2" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_28" name="Kanal H, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="A-63-1" datapointRef="121_24" groupAddress="1/3/0" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="121_24" name="Kanal G, Schalten" description="Ein / Aus / Um" datapoint="true" />
+  <entity id="121" name="Binäreingabegerät N 263E01" orderNumber="5WG1 263-1EB01" serialNumber="" datapointRef="121_0|121_4|121_12|121_8|121_20|121_16|121_28|121_24" manufacturerRef="M-0001" device="true" />
+  <entity id="122" name="IP-Router N 146" orderNumber="5WG1 146-1AB01" serialNumber="" manufacturerRef="M-0001" device="true" />
+  <entity id="123_28" name="Kanal B, Stopp, Lamellen Auf / Zu" description="Auf / Zu" datapoint="true" />
+  <entity id="A-50-0" datapointRef="123_42" groupAddress="1/2/2" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-53-0" datapointRef="123_42|123_56" groupAddress="1/2/5" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_42" name="Kanal C, Stopp, Lamellen Auf / Zu" description="Auf / Zu" datapoint="true" />
+  <entity id="123_14" name="Kanal A, Stopp, Lamellen Auf / Zu" description="Auf / Zu" datapoint="true" />
+  <entity id="A-51-0" datapointRef="123_56" groupAddress="1/2/3" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_56" name="Kanal D, Stopp, Lamellen Auf / Zu" description="Auf / Zu" datapoint="true" />
+  <entity id="123_13" name="Kanal A, Sonnenschutz Auf / Ab" description="Auf / Ab" datapoint="true" />
+  <entity id="123_27" name="Kanal B, Sonnenschutz Auf / Ab" description="Auf / Ab" datapoint="true" />
+  <entity id="A-9-1" datapointRef="123_41|123_55" groupAddress="1/0/0" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-10-1" datapointRef="123_41" groupAddress="1/0/1" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-48-1" datapointRef="123_41" groupAddress="1/2/0" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-52-0" datapointRef="123_41|123_55" groupAddress="1/2/4" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_41" name="Kanal C, Sonnenschutz Auf / Ab" description="Auf / Ab" datapoint="true" />
+  <entity id="A-49-1" datapointRef="123_55" groupAddress="1/2/1" communication="true" transmittable="true" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_55" name="Kanal D, Sonnenschutz Auf / Ab" description="Auf / Ab" datapoint="true" />
+  <entity id="123_0" name="Status Direktbetrieb" description="Ein / Aus" datapoint="true" />
+  <entity id="123_1" name="Alarm" description="Ein / Aus" datapoint="true" />
+  <entity id="123_2" name="Fahrsperre" description="Ein / Aus" datapoint="true" />
+  <entity id="123_15" name="Kanal A, Status Sonnenschutz-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="123_29" name="Kanal B, Status Sonnenschutz-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="A-54-0" datapointRef="123_43" groupAddress="1/2/6" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_43" name="Kanal C, Status Sonnenschutz-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="A-55-0" datapointRef="123_57" groupAddress="1/2/7" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_57" name="Kanal D, Status Sonnenschutz-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="123_17" name="Kanal A, Status Endlage oben" description="Ein / Aus" datapoint="true" />
+  <entity id="123_31" name="Kanal B, Status Endlage oben" description="Ein / Aus" datapoint="true" />
+  <entity id="A-56-0" datapointRef="123_45" groupAddress="1/2/8" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_45" name="Kanal C, Status Endlage oben" description="Ein / Aus" datapoint="true" />
+  <entity id="A-58-0" datapointRef="123_59" groupAddress="1/2/10" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_59" name="Kanal D, Status Endlage oben" description="Ein / Aus" datapoint="true" />
+  <entity id="123_18" name="Kanal A, Status Endlage unten" description="Ein / Aus" datapoint="true" />
+  <entity id="123_32" name="Kanal B, Status Endlage unten" description="Ein / Aus" datapoint="true" />
+  <entity id="A-57-0" datapointRef="123_46" groupAddress="1/2/9" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_46" name="Kanal C, Status Endlage unten" description="Ein / Aus" datapoint="true" />
+  <entity id="A-59-0" datapointRef="123_60" groupAddress="1/2/11" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="123_60" name="Kanal D, Status Endlage unten" description="Ein / Aus" datapoint="true" />
+  <entity id="123_11" name="Kanal A, Sonnenschutzstellung" description="8-bit Wert" datapoint="true" />
+  <entity id="123_25" name="Kanal B, Sonnenschutzstellung" description="8-bit Wert" datapoint="true" />
+  <entity id="123_39" name="Kanal C, Sonnenschutzstellung" description="8-bit Wert" datapoint="true" />
+  <entity id="123_53" name="Kanal D, Sonnenschutzstellung" description="8-bit Wert" datapoint="true" />
+  <entity id="123_16" name="Kanal A, Status Lamellen-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="123_30" name="Kanal B, Status Lamellen-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="123_44" name="Kanal C, Status Lamellen-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="123_58" name="Kanal D, Status Lamellen-Stellung" description="0% ... 100%" datapoint="true" />
+  <entity id="123" name="Jalousieaktor N 523/04" orderNumber="5WG1 523-1AB04" serialNumber="" datapointRef="123_28|123_42|123_14|123_56|123_13|123_27|123_41|123_55|123_0|123_1|123_2|123_15|123_29|123_43|123_57|123_17|123_31|123_45|123_59|123_18|123_32|123_46|123_60|123_11|123_25|123_39|123_53|123_16|123_30|123_44|123_58" manufacturerRef="M-0001" device="true" />
+  <entity id="124_0" name="Status Direktbetrieb" description="Ein / Aus" datapoint="true" />
+  <entity id="A-84-0" datapointRef="124_2" groupAddress="1/5/0" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_2" name="DALI, Status Stromversorgung" description="1=Netzausfall" datapoint="true" />
+  <entity id="A-85-0" datapointRef="124_3" groupAddress="1/5/1" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_3" name="DALI, Status Kurzschluss" description="1=Kurzschluss" datapoint="true" />
+  <entity id="A-39-0" datapointRef="124_8" groupAddress="1/1/120" communication="true" transmittable="false" updatable="false" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_8" name="Effekt" description="abrufen / beenden" datapoint="true" />
+  <entity id="A-86-0" datapointRef="124_18" groupAddress="1/5/2" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_18" name="Status, Gruppe 01" description="EVG Fehler" datapoint="true" />
+  <entity id="A-98-0" datapointRef="124_16" groupAddress="3/0/61" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_16" name="Schaltstatus, Gruppe 01" description="Ein / Aus" datapoint="true" />
+  <entity id="A-100-0" datapointRef="124_15" groupAddress="3/0/41" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_15" name="Dimmwertstatus, Gruppe 01" description="8-bit Wert" datapoint="true" />
+  <entity id="A-96-0" datapointRef="124_14" groupAddress="3/0/31" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_14" name="Dimmwert, Gruppe 01" description="8-bit Wert setzen" datapoint="true" />
+  <entity id="A-94-0" datapointRef="124_13" groupAddress="3/0/11" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_13" name="Dimmen, Gruppe 01" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-92-0" datapointRef="124_12" groupAddress="3/0/1" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_12" name="Schalten, Gruppe 01" description="Ein / Aus" datapoint="true" />
+  <entity id="A-93-0" datapointRef="124_19" groupAddress="3/0/2" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_19" name="Schalten, Gruppe 02" description="Ein / Aus" datapoint="true" />
+  <entity id="A-95-0" datapointRef="124_20" groupAddress="3/0/12" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_20" name="Dimmen, Gruppe 02" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-97-0" datapointRef="124_21" groupAddress="3/0/32" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_21" name="Dimmwert, Gruppe 02" description="8-bit Wert setzen" datapoint="true" />
+  <entity id="A-101-0" datapointRef="124_22" groupAddress="3/0/42" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_22" name="Dimmwertstatus, Gruppe 02" description="8-bit Wert" datapoint="true" />
+  <entity id="A-99-0" datapointRef="124_23" groupAddress="3/0/62" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_23" name="Schaltstatus, Gruppe 02" description="Ein / Aus" datapoint="true" />
+  <entity id="A-87-0" datapointRef="124_25" groupAddress="1/5/3" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="124_25" name="Status, Gruppe 02" description="EVG Fehler" datapoint="true" />
+  <entity id="124" name="instabus / DALI Gateway N 141" orderNumber="5WG1 141-1AB01" serialNumber="" datapointRef="124_0|124_2|124_3|124_8|124_18|124_16|124_15|124_14|124_13|124_12|124_19|124_20|124_21|124_22|124_23|124_25" manufacturerRef="M-0001" device="true" />
+  <entity id="2" name="Verteilung" description="" deviceRef="107|109|116|119|121|122|123|124" roomNumber="" view="true" buildingPartDistributionBoard="true" />
+  <entity id="A-51-1" datapointRef="112_0|108_111" groupAddress="1/2/3" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="112_0" name="Lamelle Wippe links" description="Auf / Zu" datapoint="true" />
+  <entity id="A-49-2" datapointRef="112_1|108_110" groupAddress="1/2/1" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="112_1" name="Jalousie Wippe links" description="Auf / Ab" datapoint="true" />
+  <entity id="A-26-1" datapointRef="112_3|108_121" groupAddress="1/1/202" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="112_3" name="Dimmen Wippe rechts" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-25-1" datapointRef="112_2|108_120" groupAddress="1/1/201" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="112_2" name="Dimmen E/A Wippe rechts" description="Ein / Aus" datapoint="true" />
+  <entity id="112" name="Taster 2-fach UP 286 DELTA style" orderNumber="5WG1 286-2AB_1" serialNumber="" datapointRef="112_0|112_1|112_3|112_2" manufacturerRef="M-0001" device="true" />
+  <entity id="3" name="Büro" description="" deviceRef="112" roomNumber="" view="true" buildingPartRoom="true" />
+  <entity id="118_0" name="Schalten" description="Ein / Aus" datapoint="true" />
+  <entity id="A-11-1" datapointRef="118_1" groupAddress="1/0/2" communication="true" transmittable="false" updatable="false" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="118_1" name="Sperrung" description="aktiviert / aufgehoben" datapoint="true" />
+  <entity id="118" name="Bewegungsmelder UP 255 Delta profil / style" orderNumber="5WG1 255-2AB__" serialNumber="" datapointRef="118_0|118_1" manufacturerRef="M-0001" device="true" />
+  <entity id="4" name="Treppenhaus" description="" deviceRef="118" roomNumber="" view="true" buildingPartRoom="true" />
+  <entity id="A-89-0" datapointRef="108_10" groupAddress="1/5/5" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_10" name="Handsender.Batteriestatus" description="Batteriestatus" datapoint="true" />
+  <entity id="A-15-3" datapointRef="108_1|108_40" groupAddress="1/1/2" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_1" name="Lokale Taste" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-9-2" datapointRef="108_180|110_0" groupAddress="1/0/0" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_180" name="Handsender.Zentral aus" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-40-1" datapointRef="108_130" groupAddress="1/1/200" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_130" name="Handsender.Beleuchtung" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="108_120" name="Handsender.Licht Büro" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="108_121" name="Handsender.Licht Büro" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="108_111" name="Handsender.Jalousie M2" description="Lamelle, Auf / Zu" datapoint="true" />
+  <entity id="108_110" name="Handsender.Jalousie M2" description="Jalousie, Auf / Ab" datapoint="true" />
+  <entity id="A-50-1" datapointRef="108_101" groupAddress="1/2/2" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_101" name="Handsender.Jalousie M1" description="Lamelle, Auf / Zu" datapoint="true" />
+  <entity id="A-48-2" datapointRef="108_100" groupAddress="1/2/0" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_100" name="Handsender.Jalousie M1" description="Jalousie, Auf / Ab" datapoint="true" />
+  <entity id="A-93-1" datapointRef="108_90|111_0" groupAddress="3/0/2" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_90" name="Handsender.Studio 2" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-95-1" datapointRef="108_91|111_1" groupAddress="3/0/12" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_91" name="Handsender.Studio 2" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="A-92-1" datapointRef="108_80|111_2" groupAddress="3/0/1" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_80" name="Handsender.Studio 1" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-94-1" datapointRef="108_81|111_3" groupAddress="3/0/11" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_81" name="Handsender.Studio 1" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="108_70" name="Handsender.Licht F" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="108_71" name="Handsender.Licht F" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="108_60" name="Handsender.Licht E" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="108_61" name="Handsender.Licht E" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="A-16-3" datapointRef="108_50" groupAddress="1/1/3" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_50" name="Handsender.Licht D" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-22-1" datapointRef="108_51" groupAddress="1/1/13" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_51" name="Handsender.Licht D" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="108_40" name="Handsender.Licht C" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-21-1" datapointRef="108_41" groupAddress="1/1/12" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_41" name="Handsender.Licht C" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="A-14-3" datapointRef="108_30" groupAddress="1/1/1" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_30" name="Handsender.Licht B" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-20-1" datapointRef="108_31" groupAddress="1/1/11" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_31" name="Handsender.Licht B" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="A-13-3" datapointRef="108_20" groupAddress="1/1/0" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_20" name="Handsender.Licht A" description="Schalten, Ein / Aus" datapoint="true" />
+  <entity id="A-19-1" datapointRef="108_21" groupAddress="1/1/10" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="108_21" name="Handsender.Licht A" description="Dimmen, Heller / Dunkler" datapoint="true" />
+  <entity id="108" name="Koppler wave / instabus UP 140" orderNumber="5WG3 140-2_B_1" serialNumber="" datapointRef="108_10|108_1|108_180|108_130|108_120|108_121|108_111|108_110|108_101|108_100|108_90|108_91|108_80|108_81|108_70|108_71|108_60|108_61|108_50|108_51|108_40|108_41|108_30|108_31|108_20|108_21" manufacturerRef="M-0001" device="true" />
+  <entity id="110_0" name="Schalten" description="Aus" datapoint="true" />
+  <entity id="110" name="DELTA BA UP 116/21 (Tasterstellung)" orderNumber="5WG1 116-2AB21" serialNumber="" datapointRef="110_0" manufacturerRef="M-0001" device="true" />
+  <entity id="A-10-2" datapointRef="115_0" groupAddress="1/0/1" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-70-0" datapointRef="115_0" groupAddress="1/3/7" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_0" name="Komfortbetrieb" description="Ein / Aus" datapoint="true" />
+  <entity id="A-68-1" datapointRef="115_5" groupAddress="1/3/5" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_5" name="Sollwert" description="Aktueller Sollwert" datapoint="true" />
+  <entity id="A-67-1" datapointRef="115_6" groupAddress="1/3/4" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_6" name="Istwert-Temperatur" description="Sensor intern" datapoint="true" />
+  <entity id="A-79-0" datapointRef="115_9" groupAddress="1/3/16" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_9" name="Status" description="8-bit Status" datapoint="true" />
+  <entity id="A-69-1" datapointRef="115_10" groupAddress="1/3/6" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_10" name="Basis-Sollwert" description="Basis-Sollwert in C°" datapoint="true" />
+  <entity id="A-72-1" datapointRef="115_2" groupAddress="1/3/9" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_2" name="Frost-/Hitzeschutz" description="Ein / Aus" datapoint="true" />
+  <entity id="A-71-0" datapointRef="115_1" groupAddress="1/3/8" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_1" name="Nachtbetrieb" description="Ein / Aus" datapoint="true" />
+  <entity id="A-78-0" datapointRef="115_3" groupAddress="1/3/15" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_3" name="Taupunktbetrieb" description="Ein / Aus" datapoint="true" />
+  <entity id="A-77-0" datapointRef="115_4" groupAddress="1/3/14" communication="true" transmittable="true" updatable="true" readable="true" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_4" name="Taster" description="Ein / Aus" datapoint="true" />
+  <entity id="A-64-1" datapointRef="115_7" groupAddress="1/3/1" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_7" name="Stellgröße Heizen" description="stetig" datapoint="true" />
+  <entity id="A-66-1" datapointRef="115_8" groupAddress="1/3/3" communication="true" transmittable="true" updatable="false" readable="true" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="115_8" name="Stellgröße Kühlen" description="stetig" datapoint="true" />
+  <entity id="115" name="Raumtemperaturregler UP 254/03 DELTA style" orderNumber="5WG1 254-2AB_3" serialNumber="" datapointRef="115_0|115_5|115_6|115_9|115_10|115_2|115_1|115_3|115_4|115_7|115_8" manufacturerRef="M-0001" device="true" />
+  <entity id="A-13-4" datapointRef="117_0" groupAddress="1/1/0" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_0" name="Dimmen E/A, Wippe A" description="Ein / Aus" datapoint="true" />
+  <entity id="A-19-2" datapointRef="117_1" groupAddress="1/1/10" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_1" name="Dimmen, Wippe A" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-14-4" datapointRef="117_2" groupAddress="1/1/1" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_2" name="Dimmen E/A, Wippe B" description="Ein / Aus" datapoint="true" />
+  <entity id="A-20-2" datapointRef="117_3" groupAddress="1/1/11" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_3" name="Dimmen, Wippe B" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-15-4" datapointRef="117_4" groupAddress="1/1/2" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_4" name="Dimmen E/A, Wippe C" description="Ein / Aus" datapoint="true" />
+  <entity id="A-21-2" datapointRef="117_5" groupAddress="1/1/12" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_5" name="Dimmen, Wippe C" description="Heller / Dunkler" datapoint="true" />
+  <entity id="A-50-2" datapointRef="117_6" groupAddress="1/2/2" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_6" name="Lamelle, Wippe D" description="Auf / Zu" datapoint="true" />
+  <entity id="A-48-3" datapointRef="117_7" groupAddress="1/2/0" communication="true" transmittable="true" updatable="false" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="117_7" name="Jalousie, Wippe D" description="Auf / Ab" datapoint="true" />
+  <entity id="117" name="Taster 4-fach UP 287 DELTA style" orderNumber="5WG1 287-2AB__ BA2" serialNumber="" datapointRef="117_0|117_1|117_2|117_3|117_4|117_5|117_6|117_7" manufacturerRef="M-0001" device="true" />
+  <entity id="A-67-2" datapointRef="120_1" groupAddress="1/3/4" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_1" name="Meldung 1 empfangen" description="16 Bit Fließkommawert" datapoint="true" />
+  <entity id="120_0" name="Hintergrundbeleuchtung" description="Ein / Aus" datapoint="true" />
+  <entity id="A-88-0" datapointRef="120_33" groupAddress="1/5/4" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_33" name="Alarmstatus" description="Ein / Aus" datapoint="true" />
+  <entity id="120_34" name="Alarm quittieren" description="Alarm Aus" datapoint="true" />
+  <entity id="A-68-2" datapointRef="120_2" groupAddress="1/3/5" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_2" name="Meldung 2 empfangen" description="16 Bit Fließkommawert" datapoint="true" />
+  <entity id="A-86-1" datapointRef="120_3" groupAddress="1/5/2" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_3" name="Meldung 3 empfangen" description="Ein / Aus" datapoint="true" />
+  <entity id="A-87-1" datapointRef="120_4" groupAddress="1/5/3" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_4" name="Meldung 4 empfangen" description="Ein / Aus" datapoint="true" />
+  <entity id="A-96-1" datapointRef="120_5" groupAddress="3/0/31" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="A-100-1" datapointRef="120_5" groupAddress="3/0/41" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_5" name="Meldung 5 empfangen" description="Wert 8 Bit" datapoint="true" />
+  <entity id="A-85-1" datapointRef="120_10" groupAddress="1/5/1" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_10" name="Meldung 10 empfangen" description="Ein / Aus" datapoint="true" />
+  <entity id="A-84-1" datapointRef="120_11" groupAddress="1/5/0" communication="true" transmittable="true" updatable="true" readable="false" writable="true" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_11" name="Meldung 11 empfangen" description="Ein / Aus" datapoint="true" />
+  <entity id="A-96-2" datapointRef="120_21" groupAddress="3/0/31" communication="true" transmittable="true" updatable="true" readable="false" writable="false" priorityRef="P-01" groupObject="true" accessMethod="true" />
+  <entity id="120_21" name="Meldung 5 senden" description="Wert 8 Bit" datapoint="true" />
+  <entity id="120_17" name="Meldung 1 senden" description="16 Bit Fließkommawert" datapoint="true" />
+  <entity id="120_18" name="Meldung 2 senden" description="16 Bit Fließkommawert" datapoint="true" />
+  <entity id="120" name="Anzeige-/Bedieneinheit UP 585, DELTA profil" orderNumber="5WG1 585-2AB_1" serialNumber="" datapointRef="120_1|120_0|120_33|120_34|120_2|120_3|120_4|120_5|120_10|120_11|120_21|120_17|120_18" manufacturerRef="M-0001" device="true" />
+  <entity id="5" name="Wohnen" description="" deviceRef="108|110|115|117|120" roomNumber="" view="true" buildingPartRoom="true" />
+  <entity id="111_3" name="Dimmen Wippe links" description="Heller / Dunkler" datapoint="true" />
+  <entity id="111_2" name="Dimmen E/A Wippe links" description="Ein / Aus" datapoint="true" />
+  <entity id="111_0" name="Dimmen E/A Wippe rechts" description="Ein / Aus" datapoint="true" />
+  <entity id="111_1" name="Dimmen Wippe rechts" description="Heller / Dunkler" datapoint="true" />
+  <entity id="111" name="DELTA BA UP 116/11 (Mittelstellung)" orderNumber="5WG1 116-2AB11" serialNumber="" datapointRef="111_3|111_2|111_0|111_1" manufacturerRef="M-0001" device="true" />
+  <entity id="6" name="Studio" description="" deviceRef="111" roomNumber="" view="true" buildingPartRoom="true" />
+  <entity id="1" name="Gamma Trainingskoffer" description="" viewRef="2|3|4|5|6" roomNumber="" view="true" buildingPartBuilding="true" />
+  <entity id="I-0" name="EIB Koffer" viewRef="1|V-1079" installation="true" />
+  <entity id="V-1079" name="Exportmodell" view="true" />
+</project>

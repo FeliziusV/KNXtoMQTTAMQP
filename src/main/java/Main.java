@@ -18,7 +18,7 @@ import org.w3c.dom.NamedNodeMap;
 
 public class Main {
     private final Logger Log = LoggerFactory.getLogger(Main.class);
-    public static boolean run=true;
+    public static boolean run = true;
 
 
     public static void main(String[] args) {
@@ -117,13 +117,6 @@ public class Main {
             return;
         }
     }
-
-
-
-
-
-
-
 
 }
 
