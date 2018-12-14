@@ -3,6 +3,8 @@ import org.slf4j.LoggerFactory;
 import tuwien.auto.calimero.GroupAddress;
 import tuwien.auto.calimero.KNXException;
 import tuwien.auto.calimero.KNXFormatException;
+import tuwien.auto.calimero.datapoint.Datapoint;
+import tuwien.auto.calimero.datapoint.StateDP;
 import tuwien.auto.calimero.link.KNXNetworkLink;
 import tuwien.auto.calimero.link.KNXNetworkLinkIP;
 import tuwien.auto.calimero.link.medium.TPSettings;
@@ -12,6 +14,8 @@ import  Exception.*;
 
 
 import java.net.InetSocketAddress;
+
+import static tuwien.auto.calimero.process.ProcessCommunicationBase.SCALING;
 
 public  class KNX_Communication {
 
@@ -56,11 +60,9 @@ public  class KNX_Communication {
     public int readControl(String groupAddress) throws KNX_Connection_Exception{
        int value=0;
         try {
-            Log.info("reading double value from datapoint " + groupAddress);
 
            value = pc.readControl(new GroupAddress(groupAddress));
 
-            Log.info("datapoint " + groupAddress + " value = " + value);
 
         } catch (KNXFormatException e1) {
             throw new KNX_Connection_Exception(e1.getMessage());
@@ -125,12 +127,43 @@ public boolean readBoolean(String groupAddress) throws KNX_Connection_Exception{
         return value;
 
 }
+public String readDP(String groupAddress) throws KNX_Connection_Exception{
+    String value=null;
+    try{
+        Datapoint dp=new StateDP(new GroupAddress(groupAddress),"",9,"9.001");
+        value=pc.read(dp);
 
-    public String readString(String groupAddress) throws KNX_Connection_Exception{
+    }
+    catch (KNXException e1){
+        throw new KNX_Connection_Exception(e1.getMessage());
+    }
+    catch (InterruptedException e2){
+        throw new KNX_Connection_Exception(e2.getMessage());
+
+    }
+    return value;
+}
+    public String readSwitch(String groupAddress) throws KNX_Connection_Exception{
         String value=null;
         try{
-            Log.info(groupAddress);
-            value=pc.readString(new GroupAddress(groupAddress));
+            Datapoint dp=new StateDP(new GroupAddress(groupAddress),"",0,"1.001");
+            value=pc.read(dp);
+
+        }
+        catch (KNXException e1){
+            throw new KNX_Connection_Exception(e1.getMessage());
+        }
+        catch (InterruptedException e2){
+            throw new KNX_Connection_Exception(e2.getMessage());
+
+        }
+        return value;
+    }
+
+    public int readUnsigned(String groupAddress) throws KNX_Connection_Exception{
+        int value;
+        try{
+            value=pc.readUnsigned(new GroupAddress(groupAddress),SCALING);
         }
         catch (KNXException e1){
             throw new KNX_Connection_Exception(e1.getMessage());

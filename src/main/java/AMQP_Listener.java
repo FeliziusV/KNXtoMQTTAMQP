@@ -8,7 +8,7 @@ public class AMQP_Listener {
 
 
 
-    public AMQP_Listener(String userName, String password, String virtualHost, String hostName, int portNumber, String topic, KNX_Communication knx_con){
+    public AMQP_Listener(String userName, String password, String virtualHost, String hostName, int portNumber, String topic, KNX_Communication knx_con) {
         ConnectionFactory factory = new ConnectionFactory();
 
         factory.setUsername(userName);
@@ -21,7 +21,6 @@ public class AMQP_Listener {
 
 
             channel.queueDeclare(topic, false, false, false, null);
-            Log.info("connected!x!");
             Consumer consumer = new DefaultConsumer(channel) {
 
                 @Override
@@ -29,11 +28,10 @@ public class AMQP_Listener {
                 public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)
 
                         throws IOException {
-                    Log.info("begin to listen!!!");
 
                     String message = new String(body, "UTF-8");
 
-                    Log.info("--------AMQP Message: '" + message + "'");
+                    Log.info("AMQP Input: '" + message + "'");
 
                     String s[]=message.split(";");
                     String groupAddress=s[0];
@@ -46,7 +44,7 @@ public class AMQP_Listener {
                             knx_con.writeBoolean(groupAddress, Boolean.parseBoolean(value));
                         }
                         catch ( Exception e2){
-
+                           Log.error("KNX writing error");
                         }
                     }
                     else if(datatype.contains("String")) {
@@ -55,6 +53,7 @@ public class AMQP_Listener {
                             knx_con.writeString(groupAddress, value);
                         }
                         catch ( Exception e2){
+                            Log.error("KNX writing error");
 
                         }
                     }
@@ -65,10 +64,11 @@ public class AMQP_Listener {
                             knx_con.writeDouble(groupAddress, Double.parseDouble(value));
                         }
                         catch ( Exception e2){
+                            Log.error("KNX writing error");
 
                         }
                     }
-                    Log.info("ends to listen!!!");
+
 
                 }
 
@@ -79,9 +79,12 @@ public class AMQP_Listener {
 
         }
         catch (IOException e1){
+            Log.error("AMQP listening Error");
+
 
         }
         catch (Exception e2){
+            Log.error("AMQP listening Error");
 
         }
 

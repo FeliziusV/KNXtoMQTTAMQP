@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/KNXtoMQTTAMQP.iml" filepath="$PROJECT_DIR$/KNXtoMQTTAMQP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KNXtoMQTT.iml" filepath="$PROJECT_DIR$/KNXtoMQTT.iml" />
     </modules>
   </component>
 </project>

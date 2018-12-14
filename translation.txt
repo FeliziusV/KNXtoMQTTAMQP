@@ -1,0 +1,12 @@
+Ein / Aus / Um - readBoolean
+8-bit Wert - readUnsigned
+Ein / Aus -readBoolean
+EIS 1 - 1
+EIS 3 -4
+EIS 4 - 11
+EIS 5 -9
+EIS 14 -6
+0% ... 100% - readUnsigned
+EVG Fehler-readBoolean
+Basis-Sollwert in C°- 9 9.001
+stetig-readUnsingned

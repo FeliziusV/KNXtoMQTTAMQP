@@ -1,7 +1,7 @@
 /**
  * PropertiesManager
  *opens a Config File and allows access to its config values
- * @author Felix Walcher
+ * @author
  * @version 0.1
  */
 

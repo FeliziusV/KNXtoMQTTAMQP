@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="KNXtoMQTTAMQP" />
+        <module name="KNXtoMQTT" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="KNXtoMQTTAMQP" target="1.9" />
+      <module name="KNXtoMQTT" target="1.9" />
     </bytecodeTargetLevel>
   </component>
 </project>

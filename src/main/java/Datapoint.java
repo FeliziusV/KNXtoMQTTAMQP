@@ -1,7 +1,7 @@
 /**
  * Datapoint Class
  *
- * @author Felix Walcher
+ * @author
  * @version 0.1
  */
 
@@ -12,26 +12,17 @@ public class Datapoint {
     private String name;
     private String topic;
     private String groupAddress;
-    private String dataType;
 
-    public Datapoint(String name){
-        this.name=name;
 
-    }
-    public Datapoint(String name, String topic, String groupAddress, String dataType){
+    public Datapoint(String name, String topic, String groupAddress){
         this.name=name;
         this.topic=topic;
         this.groupAddress=groupAddress;
-        this.dataType=dataType;
 
     }
 
     public String getName(){
         return name;
-    }
-
-    public void setTopic(String topic){
-        this.topic=topic;
     }
 
     public String getTopic(){
@@ -42,15 +33,5 @@ public class Datapoint {
         return groupAddress;
     }
 
-    public void setGroupAddress(String groupAddress){
-        this.groupAddress=groupAddress;
-    }
 
-    public String getDataType() {
-        return dataType;
-    }
-
-    public void setDataType(String dataType){
-        this.dataType=dataType;
-    }
 }

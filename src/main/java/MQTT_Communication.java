@@ -40,8 +40,7 @@ public  class MQTT_Communication {
      * @exception IoT_Connection_Exception   if an Connection error occurs
      */
     public void publishMessage(String topic, String message)throws IoT_Connection_Exception {
-        System.out.println("x"+topic+"x");
-        System.out.println("x"+message+"x");
+
         MqttMessage msg = new MqttMessage();
         msg.setPayload(message.getBytes());
         msg.setQos(qos);

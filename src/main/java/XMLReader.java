@@ -40,28 +40,9 @@ public class XMLReader {
                NamedNodeMap nmap=nNode.getAttributes();
               String[] idx=nmap.getNamedItem("id").toString().split("=");
               String id=idx[1];
-               // NodeList child= nNode.getChildNodes();
-                //Log.info(""+child.getLength());
-                /*
-                for (int temp2 = 0; temp2 < child.getLength(); temp2++) {
-                    Node childnode = child.item(temp2);
-                    if (childnode.getNodeType() == Node.ELEMENT_NODE) {
-                        Element eElement = (Element) childnode;
-                        Log.info("Feature tag="+eElement.getAttribute("tag")+" ;value= "+eElement.getAttribute("value"));
 
-                        entity.addFeature(eElement.getAttribute("tag"),eElement.getAttribute("value"));
-
-                        if(eElement.getAttribute("tag").contains("id")){
-
-                            id=eElement.getAttribute("value");
-
-                        }
-                    }
-                }
-                */
 
                 id=id.replaceAll("^\"|\"$", "");
-                Log.info("x"+id+"x");
                 entities.put(id,nmap);
 
             }

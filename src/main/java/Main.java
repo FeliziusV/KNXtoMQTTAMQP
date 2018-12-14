@@ -1,7 +1,7 @@
 /**
  * Main Class
  *
- * @author Felix Walcher
+ * @author
  * @version 0.1
  */
 
@@ -9,9 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import  Exception.*;
 import org.w3c.dom.NamedNodeMap;
 
@@ -24,16 +21,25 @@ public class Main {
     public static void main(String[] args) {
 
         //xml reader to read the tag based model
+        System.out.println("###################################");
+        System.out.println("#      KNXtoMQTT/AMQP v. 0.1      #");
+        System.out.println("###################################");
+        System.out.println("note: press 'q' to exit ");
+        System.out.println("");
 
         XMLReader xmlReader = new XMLReader();
 
         try {
+
+
             HashMap<String, NamedNodeMap> tag_model = xmlReader.readConfig("knx_input_model.xml");
 
             PropertiesManager prop = new PropertiesManager("KNXtoMQTTAMQP.config");
             DatapointManager datapointManager = new DatapointManager(tag_model, prop);
             datapointManager.setUpConnection();
 
+
+            // Terminal Thread
             Thread console_thread=new Thread(){
                 public void run() {
                     Scanner scanner = new Scanner(System.in);
@@ -58,34 +64,7 @@ public class Main {
 
             };
             console_thread.start();
-
-
-            //thread to read Data from datapoints
-
-            /*
-            ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
-            exec.scheduleAtFixedRate(new Runnable() {
-                @Override
-                public void run() {
-
-
-                        try {
-                            datapointManager.readDatapoints();
-                        } catch (IoT_Connection_Exception e1) {
-
-                            return;
-                        } catch (KNX_Connection_Exception e3) {
-                            return;
-                        }
-                        if(!run){
-                            exec.shutdown();
-                        }
-
-
-                    }
-
-            }, 0, 1, TimeUnit.SECONDS);
-        */
+            //Thread that reads datapoint-values each seconds
             while(run){
                 try {
                     datapointManager.readDatapoints();
@@ -101,9 +80,8 @@ public class Main {
                 }
 
             }
-            System.out.println("kot");
             datapointManager.disconnect();
-            return;
+            System.exit(0);
         } catch (Invalid_input_Exception e1) {
 
             return;
@@ -116,8 +94,23 @@ public class Main {
 
             return;
         }
-    }
 
+
+
+
+
+/*
+        try {
+            KNX_Communication c = new KNX_Communication("169.254.146.146", "169.254.232.243");
+
+            System.out.println(c.readSwitch("1/1/1"));
+        } catch (KNX_Connection_Exception e) {
+
+        }
+
+*/
+
+    }
 }
 
 

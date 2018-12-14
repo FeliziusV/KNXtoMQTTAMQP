@@ -1,7 +1,7 @@
 /**
  * DatapointManager Class
  *
- * @author Felix Walcher
+ * @author
  * @version 0.1
  */
 import org.slf4j.Logger;
@@ -16,6 +16,7 @@ import org.w3c.dom.NamedNodeMap;
 public class DatapointManager {
 
     private HashMap<String, Datapoint> DatapointMap=new HashMap<String, Datapoint>();
+    private HashMap<String,String>datapointType=new HashMap<String,String>();
     private PropertiesManager prop;
     private MQTT_Communication MQTT_con;
     private AMQP_Communication AMQP_con;
@@ -31,7 +32,7 @@ public class DatapointManager {
 
 
     /**
-     * Constructor for a new Datapoint Manager. Creates new Datapoints for each Entity that contains the datapoint tags
+     * Constructor for a new Datapoint Manager. Creates new Datapoints for each Entity
      * @param tag_model   Hashmap containing all KNX entities
      * @param prop  Configuration File
      * @exception Invalid_input_Exception  throws if an error occurs during the reading process
@@ -42,6 +43,99 @@ public class DatapointManager {
         this.prop=prop;
 
         HashMap<String,String>devicelist=new HashMap<String,String>();
+
+
+        for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
+            NamedNodeMap map=pair.getValue();
+
+            String id=null;
+            String address=null;
+            String datapointRef=null;
+            String description=null;
+            String datatype=null;
+            String readable=null;
+
+
+            for (int j = 0; j < map.getLength(); j++) {
+
+                if(map.item(j).getNodeName().contains("id")){
+                    id=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+                }
+                if(map.item(j).getNodeName().contains("groupAddress")){
+                    address=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+                if(map.item(j).getNodeName().contains("datapointRef")){
+                    datapointRef=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+                if(map.item(j).getNodeName().contains("readable")){
+                    readable=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
+
+                }
+
+
+
+
+
+
+            }
+
+
+
+            if(datapointRef!=null&&readable!=null) {
+                if(datapointRef.length()<=6){
+
+
+                    NamedNodeMap map2 = tag_model.get(datapointRef);
+                    for (int jj = 0; jj < map2.getLength(); jj++) {
+                        if (map2.item(jj).getNodeName().contains("description")) {
+                            description = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
+                        }
+
+
+
+                    }
+
+                    description=description.replace("\\\\\\","");
+
+
+                    if(description.contains("Ein / Aus")||description.contains("16 Bit")||description.contains("stetig")||description.contains("Heller / Dunkler")||description.contains("Auf / Zu")||description.contains("Auf / Ab")||description.contains("abrufen / beenden")||description.contains("0% ... 100%")||description.contains("1 Bit")) {
+                        datapointType.put(address, description);
+                    }
+                }
+                else{
+                    String[]a=datapointRef.split("\\|");
+
+                    for(int i=0;i<a.length;i++){
+
+                        NamedNodeMap map2 = tag_model.get(a[i]);
+                        for (int jj = 0; jj < map2.getLength(); jj++) {
+                            if (map2.item(jj).getNodeName().contains("description")) {
+                                description = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
+                            }
+
+
+
+                        }
+
+                        description=description.replace("\\\\\\","");
+
+
+                        if(description.contains("Ein / Aus")||description.contains("16 Bit")||description.contains("stetig")||description.contains("Heller / Dunkler")||description.contains("Auf / Zu")||description.contains("Auf / Ab")||description.contains("abrufen / beenden")||description.contains("0% ... 100%")||description.contains("1 Bit")) {
+                            if(!datapointType.containsKey(address)) {
+                                datapointType.put(address, description);
+                            }
+                        }
+
+                    }
+                }
+
+            }
+
+
+
+        }
 
         for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
             NamedNodeMap map=pair.getValue();
@@ -66,17 +160,18 @@ public class DatapointManager {
 
             }
             if(device!=null){
-                System.out.println(datapointRef);
 
                 name=name.replaceAll("\\s+","");
                 name=name.replace("-","");
                 name=name.replace("\\\\\\","");
                 name=name.replace("/","");
+                if(datapointRef!=null) {
+                    String[] devices = datapointRef.split("\\|");
 
-                String[]devices=datapointRef.split("\\|");
-                for(int i=0;i<devices.length;i++){
-                    System.out.println(devices[i]);
-                    devicelist.put(devices[i],name);
+                    for (int i = 0; i < devices.length; i++) {
+                        devicelist.put(devices[i], name);
+                        Log.info("device "+devices[i]+" found");
+                    }
                 }
             }
 
@@ -84,9 +179,8 @@ public class DatapointManager {
 
 
         for (Map.Entry<String, NamedNodeMap> pair : tag_model.entrySet()) {
-            System.out.println(pair.getKey());
+
             NamedNodeMap map=pair.getValue();
-            System.out.println(map.getLength());
 
             String id=null;
             String address=null;
@@ -97,7 +191,6 @@ public class DatapointManager {
 
 
             for (int j = 0; j < map.getLength(); j++) {
-                System.out.println(map.item(j).getNodeName()+":"+map.item(j).getNodeValue());
 
                 if(map.item(j).getNodeName().contains("id")){
                     id=map.item(j).getNodeValue().replaceAll("^\"|\"$", "");
@@ -121,44 +214,58 @@ public class DatapointManager {
 
 
             }
-            System.out.println(id);
-            System.out.println(address);
-            System.out.println(datapointRef);
+
             if(datapointRef!=null&&readable!=null) {
                 if(datapointRef.length()<=6&&readable.contains("true")){
 
 
-                    Log.info("x"+datapointRef+"x");
                     NamedNodeMap map2 = tag_model.get(datapointRef);
                     for (int jj = 0; jj < map2.getLength(); jj++) {
                         if (map2.item(jj).getNodeName().contains("name")) {
                             topic = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
                         }
 
-                        if (map2.item(jj).getNodeName().contains("description")) {
-                            String d = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
-                            if (d.contains("Ein / Aus")) {
-                                datatype = "boolean";
 
-                            } else {
-                                datatype = "String";
-
-                            }
-                        }
 
                     }
 
-                    System.out.println(topic);
                     topic=topic.replaceAll("\\s+","");
                     topic=topic.replace("-","");
                     topic=topic.replace("\\\\\\","");
                     topic=topic.replace("/","");
 
-                    System.out.println(datatype);
 
 
-                    DatapointMap.put(id,new Datapoint(id,devicelist.get(datapointRef)+"/"+topic,address,datatype));
+                    DatapointMap.put(id,new Datapoint(id,devicelist.get(datapointRef)+"/"+topic,address));
+                    Log.info("Datapoint "+id+" found");
                 }
+                else if(datapointRef.length()>=6&&readable.contains("true")){
+                    String[]a=datapointRef.split("\\|");
+                    for(int i=0;i<a.length;i++){
+
+                        NamedNodeMap map2 = tag_model.get(a[i]);
+                        for (int jj = 0; jj < map2.getLength(); jj++) {
+                            if (map2.item(jj).getNodeName().contains("name")) {
+                                topic = map2.item(jj).getNodeValue().replaceAll("^\"|\"$", "");
+                            }
+
+
+
+                        }
+
+                        topic=topic.replaceAll("\\s+","");
+                        topic=topic.replace("-","");
+                        topic=topic.replace("\\\\\\","");
+                        topic=topic.replace("/","");
+
+
+
+                        DatapointMap.put(id,new Datapoint(id,devicelist.get(a[i])+"/"+topic,address));
+
+                    }
+
+                }
+
 
             }
 
@@ -167,7 +274,6 @@ public class DatapointManager {
         }
         for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
             Datapoint datapoint = pair.getValue();
-            System.out.println(datapoint);
         }
 
         if(DatapointMap.isEmpty()){
@@ -210,7 +316,6 @@ public class DatapointManager {
 
         final String MQTT_broker_url = prop.readProperties("MQTT_broker_url").trim();;
         String MQTT_qos = null;
-        String MQTT_topic = null;
         int qos = 0;
 
 
@@ -293,14 +398,13 @@ public class DatapointManager {
      *
      */
     public void disconnect() throws Invalid_input_Exception, IoT_Connection_Exception {
-        Log.info("hier");
 
         if(MQTT){
             MQTT_con.disconnect();
             KNX_con.disconnect();
+
         }
         else{
-            Log.info("now");
             AMQP_con.disconnect();
             KNX_con.disconnect();
 
@@ -320,25 +424,86 @@ public class DatapointManager {
     }
 
     public void readDatapoints() throws IoT_Connection_Exception,KNX_Connection_Exception {
+
         for (Map.Entry<String, Datapoint> pair : DatapointMap.entrySet()) {
             Datapoint datapoint=pair.getValue();
-            String value="";
-            if(datapoint.getDataType().equals("double")) {
-                value = datapoint.getName()+" device=KNXtoMQTTAMQP value=" + KNX_con.readDouble(datapoint.getGroupAddress());
-            }
-            else if(datapoint.getDataType().equals("boolean")) {
-                value = datapoint.getName()+"device=KNXtoMQTTAMQP value=" + KNX_con.readBoolean(datapoint.getGroupAddress());
-            }
-            else if(datapoint.getDataType().equals("String")){
-                value = datapoint.getName()+"device=KNXtoMQTTAMQP value=" + KNX_con.readString(datapoint.getGroupAddress());
-            }
-            if(MQTT){
-                publishMQTT(datapoint.getTopic(),value);
-            }
-            else{
-                publishAMQP(datapoint.getTopic(),value);
+            if(datapointType.containsKey(datapoint.getGroupAddress())) {
+                String type=datapointType.get(datapoint.getGroupAddress());
+                if(type.contains("Ein / Aus")||type.contains("Heller / Dunkler")||type.contains("Auf / Zu")||type.contains("Auf / Ab")||type.contains("abrufen / beenden")) {
+
+                    boolean v = KNX_con.readBoolean(datapoint.getGroupAddress());
+                    String value = datapoint.getName() + ",device=KNXtoMQTTAMQP value=" +v;
+                    if (MQTT) {
+                        publishMQTT(datapoint.getTopic(), value);
+                        Log.info("MQTT message successful published to "+datapoint.getTopic());
+                    } else {
+                        publishAMQP(datapoint.getTopic(), value);
+                        Log.info("AMQP message successful published to "+datapoint.getTopic());
+
+                    }
+
+                }
+                if(type.contains("stetig")) {
+
+                    int v = KNX_con.readUnsigned(datapoint.getGroupAddress());
+                    String value = datapoint.getName() + ",device=KNXtoMQTTAMQP value=" +v;
+                    if (MQTT) {
+                        publishMQTT(datapoint.getTopic(), value);
+                        Log.info("MQTT message successful published to "+datapoint.getTopic());
+                    } else {
+                        publishAMQP(datapoint.getTopic(), value);
+                        Log.info("AMQP message successful published to "+datapoint.getTopic());
+
+                    }
+                }
+                if(type.contains("0% ... 100%")) {
+
+                    int v = KNX_con.readUnsigned(datapoint.getGroupAddress());
+                    String value = datapoint.getName() + ",device=KNXtoMQTTAMQP value=" +v;
+                    if (MQTT) {
+                        publishMQTT(datapoint.getTopic(), value);
+                        Log.info("MQTT message successful published to "+datapoint.getTopic());
+                    } else {
+                        publishAMQP(datapoint.getTopic(), value);
+                        Log.info("AMQP message successful published to "+datapoint.getTopic());
+
+                    }
+                }
+
+                if(type.contains("16 Bit Fließkommawert")) {
+
+                    String v = KNX_con.readDP(datapoint.getGroupAddress());
+                    v=v.replace(" °C","");
+                    String value = datapoint.getName()+","+"device=KNXtoMQTTAMQP value="+v;
+                    if (MQTT) {
+                        publishMQTT(datapoint.getTopic(), value);
+                        Log.info("MQTT message successful published to "+datapoint.getTopic());
+                    } else {
+                        publishAMQP(datapoint.getTopic(), value);
+                        Log.info("AMQP message successful published to "+datapoint.getTopic());
+
+                    }
+                }
+
+                if(type.contains("8-bit")) {
+
+                    double v = KNX_con.readUnsigned(datapoint.getGroupAddress());
+                    String value = datapoint.getName() + ",device=KNXtoMQTTAMQP value=" +v;
+                    if (MQTT) {
+                        publishMQTT(datapoint.getTopic(), value);
+                        Log.info("MQTT message successful published to "+datapoint.getTopic());
+                    } else {
+                        publishAMQP(datapoint.getTopic(), value);
+                        Log.info("AMQP message successful published to "+datapoint.getTopic());
+                    }
+                }
+
+
             }
         }
+
+
+
     }
 
 
